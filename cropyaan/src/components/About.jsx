@@ -1,329 +1,384 @@
 import Navbar from "./Navbar";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+
+const useInView = (threshold = 0.15) => {
+  const ref = useRef(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setInView(true); }, { threshold });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
+  return [ref, inView];
+};
+
+const useParallax = () => {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const onScroll = () => {
+      const rect = el.getBoundingClientRect();
+      const center = rect.top + rect.height / 2 - window.innerHeight / 2;
+      const bg = el.querySelector(".parallax-bg");
+      if (bg) bg.style.transform = `translateY(${center * 0.18}px)`;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return ref;
+};
+
+const GrainOverlay = () => (
+  <div
+    style={{
+      position: "fixed", inset: 0, pointerEvents: "none", zIndex: 9999, opacity: 0.032,
+      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+      backgroundSize: "128px 128px",
+    }}
+  />
+);
+
+const Separator = () => (
+  <div className="relative h-px w-full overflow-hidden">
+    <div style={{ background: "linear-gradient(90deg, transparent 0%, #22c55e44 30%, #22c55e88 50%, #22c55e44 70%, transparent 100%)", height: "1px" }} />
+  </div>
+);
+
+const FadeIn = ({ children, delay = 0, className = "" }) => {
+  const [ref, inView] = useInView();
+  return (
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? "translateY(0)" : "translateY(28px)",
+        transition: `opacity 0.85s ease ${delay}s, transform 0.85s ease ${delay}s`,
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+
+const AgriSplit = ({ imageUrl, imageAlt, reverse = false, children }) => {
+  const parallaxRef = useParallax();
+  return (
+    <div ref={parallaxRef} className="relative w-full grid lg:grid-cols-2 min-h-[520px]">
+      <div className={`relative overflow-hidden ${reverse ? "lg:order-2" : ""}`} style={{ minHeight: 320 }}>
+        <div
+          className="parallax-bg absolute inset-0 scale-110"
+          style={{
+            backgroundImage: `url('${imageUrl}')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: reverse
+              ? "linear-gradient(to left, #0a0a0a 0%, #0a0a0acc 18%, #0a0a0a88 40%, transparent 100%)"
+              : "linear-gradient(to right, #0a0a0a 0%, #0a0a0acc 18%, #0a0a0a88 40%, transparent 100%)",
+          }}
+        />
+        <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.38)" }} />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "radial-gradient(ellipse at 60% 80%, rgba(34,197,94,0.07) 0%, transparent 70%)",
+          }}
+        />
+      </div>
+      <div
+        className={`relative flex items-center ${reverse ? "lg:order-1" : ""}`}
+        style={{ background: "#0a0a0a" }}
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            background: reverse
+              ? "linear-gradient(to right, transparent 0%, #0a0a0a 100%)"
+              : "linear-gradient(to left, transparent 0%, #0a0a0a 100%)",
+          }}
+        />
+        <div
+          className="absolute pointer-events-none"
+          style={{
+            width: 320, height: 320, borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(34,197,94,0.055) 0%, transparent 70%)",
+            top: "50%", left: reverse ? "auto" : "10%", right: reverse ? "10%" : "auto",
+            transform: "translateY(-50%)",
+            filter: "blur(40px)",
+          }}
+        />
+        <div className="relative z-10 w-full px-8 lg:px-14 py-14">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default function About() {
   return (
     <>
-      <Navbar />
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
+        .about-root { font-family: 'DM Sans', sans-serif; }
+        .display-font { font-family: 'Playfair Display', serif; }
+        .glow-card:hover { box-shadow: 0 0 0 1px rgba(34,197,94,0.25), 0 8px 48px rgba(34,197,94,0.1); }
+        .bullet-row:hover .bullet-dot { box-shadow: 0 0 12px rgba(34,197,94,0.9); transform: scale(1.3); }
+        .bullet-row:hover .bullet-text { color: #fff; }
+      `}</style>
+      <GrainOverlay />
+      <div className="about-root bg-[#0a0a0a]">
+        <Navbar />
 
-      {/* HERO SECTION */}
-      <section className="bg-[#121212] py-20 px-6 lg:px-20 text-white">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-
-          {/* Image */}
-          <div className="w-full">
-            <div className="rounded-2xl overflow-hidden shadow-lg bg-zinc-800">
-              <img
-                src="/farmerwithdrone.jpg"
-                alt="Farmer using drone in field"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-
-          {/* Text */}
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+        {/* HERO SECTION */}
+        <AgriSplit imageUrl="/farmerwithdrone.jpg" imageAlt="Farmer using drone in field">
+          <FadeIn>
+            <p className="text-green-400 tracking-widest text-xs uppercase mb-4 font-medium" style={{ letterSpacing: "0.22em" }}>
+              Agricultural Intelligence
+            </p>
+          </FadeIn>
+          <FadeIn delay={0.1}>
+            <h2 className="display-font text-4xl md:text-5xl font-bold mb-6 text-white leading-tight">
               Empowering the{" "}
-              <span className="text-green-500">Modern Farmer</span>
+              <span style={{ color: "#22c55e", textShadow: "0 0 32px rgba(34,197,94,0.35)" }}>
+                Modern Farmer
+              </span>
             </h2>
-
-            <p className="text-gray-300 mb-6 leading-relaxed">
-              Cropyaan bridges the gap between traditional agriculture and
-              next-generation technology. We believe farming should be driven
-              by precision, powered by data, and supported by intelligent
-              systems that help farmers make confident decisions.
+          </FadeIn>
+          <FadeIn delay={0.2}>
+            <p className="text-zinc-400 mb-5 leading-relaxed text-base" style={{ fontWeight: 300 }}>
+              Cropyaan bridges the gap between traditional agriculture and next-generation technology. We believe farming should be driven by precision, powered by data, and supported by intelligent systems.
             </p>
-
-            <p className="text-gray-300 mb-8 leading-relaxed">
-              Through advanced drone deployments and AI-driven field analytics,
-              we deliver real-time crop health insights, soil monitoring, and
-              predictive yield forecasting.
+            <p className="text-zinc-400 mb-10 leading-relaxed text-base" style={{ fontWeight: 300 }}>
+              Through advanced drone deployments and AI-driven field analytics, we deliver real-time crop health insights, soil monitoring, and predictive yield forecasting.
             </p>
-
-            {/* Stats */}
-            <div className="grid grid-cols-2 gap-8 pt-6 border-t border-zinc-800">
+          </FadeIn>
+          <FadeIn delay={0.3}>
+            <div className="grid grid-cols-2 gap-8 pt-8" style={{ borderTop: "1px solid rgba(34,197,94,0.18)" }}>
               <div>
-                <h3 className="text-2xl font-bold text-green-500">10k+</h3>
-                <p className="text-gray-400 text-sm">Acres Scanned</p>
+                <h3 className="display-font text-3xl font-bold" style={{ color: "#22c55e", textShadow: "0 0 20px rgba(34,197,94,0.4)" }}>10k+</h3>
+                <p className="text-zinc-500 text-sm mt-1 tracking-wide">Acres Scanned</p>
               </div>
-
               <div>
-                <h3 className="text-2xl font-bold text-green-500">50+</h3>
-                <p className="text-gray-400 text-sm">Drone Models Deployed</p>
+                <h3 className="display-font text-3xl font-bold" style={{ color: "#22c55e", textShadow: "0 0 20px rgba(34,197,94,0.4)" }}>50+</h3>
+                <p className="text-zinc-500 text-sm mt-1 tracking-wide">Drone Models Deployed</p>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </FadeIn>
+        </AgriSplit>
 
+        <Separator />
 
-      {/* WHAT WE DO */}
-<section className="bg-[#0a0a0a] py-16 px-6 lg:px-20 text-white">
-  <div className="max-w-6xl mx-auto bg-zinc-900/50 p-10 rounded-3xl border border-zinc-800 shadow-2xl backdrop-blur-sm">
-
-    <h3 className="text-4xl font-bold mb-16 text-center tracking-tight">
-      What We <span className="text-green-500">Do</span>
-    </h3>
-
-    <div className="grid md:grid-cols-2 gap-16 items-start">
-      {/* Left Side: Services with Custom Icons */}
-      <div className="space-y-6">
-        {[
-          "Precision spraying of fertilizers and pesticides",
-          "Crop health monitoring & disease detection",
-          "Aerial field surveying and mapping",
-          "Data-driven farm insights and analytics"
-        ].map((item, index) => (
-          <div key={index} className="flex items-start gap-4 group">
-            <div className="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-green-500/10 flex items-center justify-center border border-green-500/20 group-hover:bg-green-500/20 transition-colors">
-              <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)]" />
-            </div>
-            <p className="text-lg text-zinc-300 group-hover:text-white transition-colors">
-              {item}
+        {/* WHAT WE DO */}
+        <AgriSplit imageUrl="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1200&q=80" imageAlt="Crop field aerial" reverse>
+          <FadeIn>
+            <p className="text-green-400 tracking-widest text-xs uppercase mb-4 font-medium" style={{ letterSpacing: "0.22em" }}>
+              Our Services
             </p>
+          </FadeIn>
+          <FadeIn delay={0.1}>
+            <h3 className="display-font text-4xl font-bold mb-10 text-white">
+              What We <span style={{ color: "#22c55e" }}>Do</span>
+            </h3>
+          </FadeIn>
+          <FadeIn delay={0.15}>
+            <div className="space-y-5 mb-10">
+              {[
+                "Precision spraying of fertilizers and pesticides",
+                "Crop health monitoring & disease detection",
+                "Aerial field surveying and mapping",
+                "Data-driven farm insights and analytics",
+              ].map((item, i) => (
+                <div key={i} className="bullet-row flex items-start gap-4 cursor-default" style={{ transition: "all 0.3s" }}>
+                  <div className="flex-shrink-0 mt-1.5 w-5 h-5 rounded-full flex items-center justify-center" style={{ background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.2)" }}>
+                    <div className="bullet-dot w-2 h-2 rounded-full bg-green-500" style={{ transition: "all 0.3s" }} />
+                  </div>
+                  <p className="bullet-text text-zinc-300 text-base" style={{ transition: "color 0.3s", fontWeight: 400 }}>{item}</p>
+                </div>
+              ))}
+            </div>
+          </FadeIn>
+          <FadeIn delay={0.3}>
+            <div
+              className="rounded-xl p-6"
+              style={{ background: "rgba(34,197,94,0.05)", borderLeft: "3px solid #22c55e", border: "1px solid rgba(34,197,94,0.15)" }}
+            >
+              <p className="text-zinc-300 text-sm leading-relaxed">
+                We are in the <span className="text-white font-semibold">drone development phase</span> — combining intelligent hardware with a powerful platform that makes advanced technology accessible to{" "}
+                <span style={{ color: "#22c55e" }}>every farmer</span>.
+              </p>
+            </div>
+          </FadeIn>
+        </AgriSplit>
+
+        <Separator />
+
+        {/* PLATFORM OFFERINGS */}
+        <section className="bg-[#0a0a0a] py-24 px-6 lg:px-20 text-white relative overflow-hidden">
+          <div
+            className="absolute pointer-events-none"
+            style={{
+              width: 600, height: 600, borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(34,197,94,0.04) 0%, transparent 70%)",
+              top: "50%", left: "50%", transform: "translate(-50%,-50%)",
+              filter: "blur(60px)",
+            }}
+          />
+          <div className="max-w-6xl mx-auto relative z-10">
+            <FadeIn>
+              <p className="text-green-400 tracking-widest text-xs uppercase mb-4 text-center font-medium" style={{ letterSpacing: "0.22em" }}>
+                Platform
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.1}>
+              <h3 className="display-font text-4xl md:text-5xl font-bold mb-20 text-center">
+                What Our Platform <span style={{ color: "#22c55e" }}>Will Offer</span>
+              </h3>
+            </FadeIn>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {[
+                {
+                  title: "Farming Statistics (A to Z)",
+                  items: ["Crop-wise production data", "Soil health insights", "Yield trends & regional analytics", "Market price trends"],
+                },
+                {
+                  title: "Smart Techniques",
+                  items: ["Precision agriculture techniques", "Smart irrigation methods", "Drone-based farming benefits", "Sustainable farming practices"],
+                },
+                {
+                  title: "Guides & Tutorials",
+                  items: ["Agricultural university resources", "Government department insights", "Research publications", "KVK materials & seasonal guides"],
+                },
+                {
+                  title: "Government Schemes",
+                  items: ["Central & state agriculture schemes", "Drone & equipment subsidies", "Crop insurance programs", "Application guidance & eligibility"],
+                },
+              ].map((card, i) => (
+                <FadeIn key={i} delay={i * 0.1}>
+                  <div
+                    className="glow-card rounded-2xl p-8 h-full cursor-default group"
+                    style={{
+                      background: "rgba(255,255,255,0.025)",
+                      border: "1px solid rgba(255,255,255,0.07)",
+                      transition: "box-shadow 0.4s, border-color 0.4s",
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(34,197,94,0.25)"}
+                    onMouseLeave={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)"}
+                  >
+                    <div className="flex items-center gap-3 mb-7">
+                      <div className="w-1 h-7 rounded-full bg-green-500 group-hover:h-9 group-hover:shadow-lg" style={{ boxShadow: "0 0 12px rgba(34,197,94,0.5)", transition: "height 0.3s" }} />
+                      <h4 className="text-xl font-semibold text-white group-hover:text-green-400" style={{ transition: "color 0.3s", letterSpacing: "-0.01em" }}>
+                        {card.title}
+                      </h4>
+                    </div>
+                    <ul className="space-y-3 pl-2">
+                      {card.items.map((item, j) => (
+                        <li key={j} className="flex items-start gap-3">
+                          <span className="text-green-500 mt-0.5 text-sm group-hover:scale-110 inline-block" style={{ transition: "transform 0.3s" }}>▸</span>
+                          <span className="text-zinc-400 group-hover:text-zinc-200 text-sm leading-relaxed" style={{ transition: "color 0.3s" }}>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
           </div>
-        ))}
+        </section>
+
+        <Separator />
+
+        {/* MISSION, VISION, VALUES */}
+        <section className="bg-[#0a0a0a] py-24 px-6 lg:px-20 text-white relative overflow-hidden">
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              backgroundImage: `url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1800&q=60')`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              opacity: 0.04,
+            }}
+          />
+          <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to bottom, #0a0a0a 0%, transparent 30%, transparent 70%, #0a0a0a 100%)" }} />
+          <div className="max-w-6xl mx-auto relative z-10">
+            <FadeIn>
+              <p className="text-green-400 tracking-widest text-xs uppercase mb-4 text-center font-medium" style={{ letterSpacing: "0.22em" }}>
+                Our Foundation
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.05}>
+              <h3 className="display-font text-4xl md:text-5xl font-bold mb-20 text-center text-white">
+                Built on <span style={{ color: "#22c55e" }}>Conviction</span>
+              </h3>
+            </FadeIn>
+            <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+              {[
+                {
+                  label: "Our Mission",
+                  text: "To empower farmers with intelligent tools that enhance productivity, reduce uncertainty, and promote sustainable agricultural growth.",
+                },
+                {
+                  label: "Our Vision",
+                  text: "To build a smart agricultural ecosystem where technology and data guide every farming decision — from seed to harvest.",
+                },
+                {
+                  label: "Core Values",
+                  text: "Innovation, sustainability, transparency, and a farmer-first mindset shape everything we create and every partnership we build.",
+                },
+              ].map((item, i) => (
+                <FadeIn key={i} delay={i * 0.12}>
+                  <div
+                    className="group text-center flex flex-col items-center cursor-default py-10 px-6 rounded-2xl"
+                    style={{
+                      background: "rgba(255,255,255,0.02)",
+                      border: "1px solid rgba(255,255,255,0.06)",
+                      transition: "all 0.4s",
+                    }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.background = "rgba(34,197,94,0.04)";
+                      e.currentTarget.style.borderColor = "rgba(34,197,94,0.2)";
+                      e.currentTarget.style.boxShadow = "0 0 40px rgba(34,197,94,0.07)";
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                      e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
+                      e.currentTarget.style.boxShadow = "none";
+                    }}
+                  >
+                    <div className="mb-8 relative">
+                      <div
+                        className="w-14 h-0.5 mx-auto rounded-full bg-green-500 group-hover:w-20"
+                        style={{ boxShadow: "0 0 12px rgba(34,197,94,0.5)", transition: "width 0.5s" }}
+                      />
+                    </div>
+                    <h3
+                      className="display-font text-2xl font-bold mb-5 text-white group-hover:text-green-400"
+                      style={{ transition: "color 0.3s", letterSpacing: "-0.01em" }}
+                    >
+                      {item.label}
+                    </h3>
+                    <p
+                      className="text-zinc-400 text-base leading-relaxed group-hover:text-zinc-200"
+                      style={{ transition: "color 0.35s", fontWeight: 300 }}
+                    >
+                      {item.text}
+                    </p>
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <Separator />
       </div>
-
-      {/* Right Side: Mission Statement */}
-      <div className="relative">
-        {/* Subtle decorative glow */}
-        <div className="absolute -top-10 -right-10 w-32 h-32 bg-green-500/5 blur-[80px]" />
-
-        <div className="bg-zinc-800/40 p-8 rounded-2xl border-l-4 border-green-500">
-          <p className="text-zinc-300 text-lg leading-relaxed">
-            We are currently in the <span className="text-white font-medium">drone development phase</span>.
-            Our goal is to combine intelligent drone hardware with a powerful digital
-            platform that simplifies modern agriculture and makes advanced
-            technology accessible to <span className="text-green-400">every farmer</span>.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-      {/* PLATFORM OFFERINGS - Centered & Interactive */}
-<section className="bg-[#121212] py-20 px-6 md:px-20 lg:px-40 text-white">
-  <div className="max-w-5xl mx-auto">
-
-    <h3 className="text-4xl font-bold mb-20 text-center">
-      What Our Platform <span className="text-green-500">Will Offer</span>
-    </h3>
-
-    {/* Increased the gap and max-width to pull content toward the middle */}
-    <div className="grid md:grid-cols-2 gap-x-24 gap-y-16 justify-center">
-
-      {/* Offering 1 - Farming Statistics */}
-<div className="flex flex-col items-start md:items-center">
-  <div className="w-full max-w-xs">
-    {/* Wrap both header and list in this group */}
-    <div className="group cursor-default">
-
-      <div className="flex items-center gap-3 mb-6">
-        {/* Pill transition */}
-        <div className="w-1 h-6 bg-green-500 rounded-full transition-all duration-300 group-hover:bg-green-400 group-hover:scale-y-110"></div>
-
-        {/* Heading transition to green */}
-        <h4 className="text-2xl font-semibold text-white group-hover:text-green-500 transition-colors duration-300">
-          Farming Statistics (A to Z)
-        </h4>
-      </div>
-
-      <ul className="space-y-4 pl-4">
-        {[
-          "Crop-wise production data",
-          "Soil health insights",
-          "Yield trends & regional analytics",
-          "Market price trends"
-        ].map((item, idx) => (
-          <li key={idx} className="flex items-start gap-3">
-            {/* Dot scales up when the whole group is hovered */}
-            <span className="text-green-500 transition-transform duration-300 group-hover:scale-125">•</span>
-            {/* Text turns white when the whole group is hovered */}
-            <span className="text-zinc-400 group-hover:text-white transition-colors duration-300 text-lg">
-              {item}
-            </span>
-          </li>
-        ))}
-      </ul>
-
-    </div>
-  </div>
-</div>
-
-      {/* Offering 2 - Smart Techniques */}
-<div className="flex flex-col items-start md:items-center">
-  <div className="w-full max-w-xs">
-    {/* The 'group' must wrap the heading AND the list to trigger everything at once */}
-    <div className="group cursor-default">
-
-      <div className="flex items-center gap-3 mb-6">
-        {/* Pill transition */}
-        <div className="w-1 h-6 bg-green-500 rounded-full transition-all duration-300 group-hover:bg-green-400 group-hover:scale-y-110"></div>
-
-        {/* Heading transition */}
-        <h4 className="text-2xl font-semibold text-white group-hover:text-green-500 transition-colors duration-300">
-          Smart Techniques
-        </h4>
-      </div>
-
-      <ul className="space-y-4 pl-4">
-        {[
-          "Precision agriculture techniques",
-          "Smart irrigation methods",
-          "Drone-based farming benefits",
-          "Sustainable farming practices"
-        ].map((item, idx) => (
-          <li key={idx} className="flex items-start gap-3">
-            <span className="text-green-500 transition-transform duration-300 group-hover:scale-125">•</span>
-            <span className="text-zinc-400 group-hover:text-white transition-colors duration-300 text-lg">
-              {item}
-            </span>
-          </li>
-        ))}
-      </ul>
-
-    </div>
-  </div>
-</div>
-
-      {/* Offering 3 - Guides & Tutorials */}
-<div className="flex flex-col items-start md:items-center">
-  <div className="w-full max-w-xs">
-    {/* The 'group' now wraps everything: Header + List */}
-    <div className="group cursor-default">
-
-      <div className="flex items-center gap-3 mb-6">
-        {/* Pill transition */}
-        <div className="w-1 h-6 bg-green-500 rounded-full transition-all duration-300 group-hover:bg-green-400 group-hover:scale-y-110"></div>
-
-        {/* Heading transition to green */}
-        <h4 className="text-2xl font-semibold text-white group-hover:text-green-500 transition-colors duration-300">
-          Guides & Tutorials
-        </h4>
-      </div>
-
-      <ul className="space-y-4 pl-4">
-        {[
-          "Agricultural university resources",
-          "Government department insights",
-          "Research publications",
-          "KVK materials & seasonal guides"
-        ].map((item, idx) => (
-          <li key={idx} className="flex items-start gap-3">
-            {/* Dot scales when group is hovered */}
-            <span className="text-green-500 transition-transform duration-300 group-hover:scale-125">•</span>
-            {/* Text turns white when group is hovered */}
-            <span className="text-zinc-400 group-hover:text-white transition-colors duration-300 text-lg">
-              {item}
-            </span>
-          </li>
-        ))}
-      </ul>
-
-    </div>
-  </div>
-</div>
-
-      {/* Offering 4 */}
-      {/* Offering 4 - Government Schemes */}
-<div className="flex flex-col items-start md:items-center">
-  <div className="w-full max-w-xs">
-    {/* The 'group' now correctly wraps BOTH the header and the ul list */}
-    <div className="group cursor-default">
-
-      <div className="flex items-center gap-3 mb-6">
-        {/* Pill animation */}
-        <div className="w-1 h-6 bg-green-500 rounded-full transition-all duration-300 group-hover:bg-green-400 group-hover:scale-y-110"></div>
-
-        {/* Heading transition to green */}
-        <h4 className="text-2xl font-semibold text-white group-hover:text-green-500 transition-colors duration-300">
-          Government Schemes
-        </h4>
-      </div>
-
-      <ul className="space-y-4 pl-4">
-        {[
-          "Central & state agriculture schemes",
-          "Drone & equipment subsidies",
-          "Crop insurance programs",
-          "Application guidance & eligibility"
-        ].map((item, idx) => (
-          <li key={idx} className="flex items-start gap-3">
-            {/* The bullet scales with the main group hover */}
-            <span className="text-green-500 transition-transform duration-300 group-hover:scale-125">•</span>
-            {/* The text brightens with the main group hover */}
-            <span className="text-zinc-400 group-hover:text-white transition-colors duration-300 text-lg">
-              {item}
-            </span>
-          </li>
-        ))}
-      </ul>
-
-    </div>
-  </div>
-</div>
-
-    </div>
-  </div>
-</section>
-
-
-{/* MISSION, VISION, VALUES - Seamless & Minimalist Style */}
-<section className="bg-[#121212] py-24 px-6 lg:px-20 text-white">
-  <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-12 lg:gap-16">
-
-    {/* Mission */}
-    <div className="group text-center flex flex-col items-center">
-      <div className="mb-6">
-        {/* Decorative Green Line */}
-        <div className="w-12 h-1 bg-green-500 rounded-full mx-auto group-hover:w-20 transition-all duration-500" />
-      </div>
-      <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-green-500 transition-colors">
-        Our Mission
-      </h3>
-      <p className="text-zinc-400 text-lg leading-relaxed group-hover:text-zinc-200 transition-colors duration-300">
-        To empower farmers with intelligent tools that enhance productivity,
-        reduce uncertainty, and promote sustainable agricultural growth.
-      </p>
-    </div>
-
-    {/* Vision */}
-    <div className="group text-center flex flex-col items-center">
-      <div className="mb-6">
-        <div className="w-12 h-1 bg-green-500 rounded-full mx-auto group-hover:w-20 transition-all duration-500" />
-      </div>
-      <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-green-500 transition-colors">
-        Our Vision
-      </h3>
-      <p className="text-zinc-400 text-lg leading-relaxed group-hover:text-zinc-200 transition-colors duration-300">
-        To build a smart agricultural ecosystem where technology and data
-        guide every farming decision.
-      </p>
-    </div>
-
-    {/* Core Values */}
-    <div className="group text-center flex flex-col items-center">
-      <div className="mb-6">
-        <div className="w-12 h-1 bg-green-500 rounded-full mx-auto group-hover:w-20 transition-all duration-500" />
-      </div>
-      <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-green-500 transition-colors">
-        Our Core Values
-      </h3>
-      <p className="text-zinc-400 text-lg leading-relaxed group-hover:text-zinc-200 transition-colors duration-300">
-        Innovation, sustainability, transparency, and a farmer-first
-        mindset shape everything we create.
-      </p>
-    </div>
-
-  </div>
-</section>
-
     </>
   );
 }
-
-
-
