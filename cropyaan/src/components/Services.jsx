@@ -166,17 +166,17 @@ export default function Services() {
           <div className="relative z-10 max-w-3xl mx-auto">
             <FadeIn>
               <p className="text-green-400 tracking-widest text-xs uppercase mb-5 font-medium" style={{ letterSpacing: "0.22em" }}>
-                What We Offer
+                Farmer Knowledge Hub
               </p>
             </FadeIn>
             <FadeIn delay={0.1}>
               <h2 className="display-font text-5xl md:text-6xl font-bold mb-6 text-white leading-tight">
-                Our <span style={{ color: "#22c55e", textShadow: "0 0 40px rgba(34,197,94,0.35)" }}>Services</span>
+                Agricultural <span style={{ color: "#22c55e", textShadow: "0 0 40px rgba(34,197,94,0.35)" }}>Resources</span>
               </h2>
             </FadeIn>
             <FadeIn delay={0.2}>
               <p className="text-zinc-400 text-lg" style={{ fontWeight: 300 }}>
-                Empowering agriculture with data, intelligence, and innovation.
+                Reliable knowledge and information to help every farmer grow with confidence.
               </p>
             </FadeIn>
           </div>
@@ -193,45 +193,45 @@ export default function Services() {
           </FadeIn>
           <FadeIn delay={0.1}>
             <h3 className="display-font text-4xl font-bold mb-3 text-white leading-tight">
-              Farming <span style={{ color: "#22c55e" }}>Statistics</span>
+              Agricultural <span style={{ color: "#22c55e" }}>Data Insights</span>
             </h3>
             <p className="text-zinc-500 text-sm mb-8" style={{ fontWeight: 300 }}>
-              Comprehensive agricultural data from field to market.
+              Understand crop production, soil health, and market trends through accessible agricultural data.
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
             <BulletList items={[
-              "Crop-wise production data",
-              "Soil health insights",
-              "Yield trends & regional analytics",
-              "Market price trend analysis",
+              "Exploring crop-wise production data across India",
+              "Understanding soil health and nutrient information",
+              "Reading yield trends and regional farming patterns",
+              "Tracking market price movements for informed selling",
             ]} />
           </FadeIn>
         </AgriSplit>
 
         <Separator />
 
-        {/* 2. MODERN FARMING INSIGHTS */}
+        {/* 2. MODERN FARMING TECHNIQUES */}
         <AgriSplit imageUrl="https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=1200&q=80" reverse>
           <FadeIn>
             <p className="text-green-400 tracking-widest text-xs uppercase mb-4 font-medium" style={{ letterSpacing: "0.22em" }}>
-              02 — Intelligence
+              02 — Techniques
             </p>
           </FadeIn>
           <FadeIn delay={0.1}>
             <h3 className="display-font text-4xl font-bold mb-3 text-white leading-tight">
-              Modern Farming <span style={{ color: "#22c55e" }}>Insights</span>
+              Modern Farming <span style={{ color: "#22c55e" }}>Techniques</span>
             </h3>
             <p className="text-zinc-500 text-sm mb-8" style={{ fontWeight: 300 }}>
-              Next-generation techniques for precision agriculture.
+              Learn about contemporary farming methods that improve productivity and promote sustainability.
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
             <BulletList items={[
-              "Precision agriculture techniques",
-              "Smart irrigation systems",
-              "Drone-based farming advantages",
-              "Sustainable & eco-friendly practices",
+              "Understanding precision agriculture and its benefits",
+              "How smart irrigation techniques conserve water",
+              "How drones are used in modern agriculture",
+              "Adopting sustainable and eco-friendly farming practices",
             ]} />
           </FadeIn>
         </AgriSplit>
@@ -247,18 +247,18 @@ export default function Services() {
           </FadeIn>
           <FadeIn delay={0.1}>
             <h3 className="display-font text-4xl font-bold mb-3 text-white leading-tight">
-              Guides & <span style={{ color: "#22c55e" }}>Tutorials</span>
+              Guides & <span style={{ color: "#22c55e" }}>Learning Resources</span>
             </h3>
             <p className="text-zinc-500 text-sm mb-6" style={{ fontWeight: 300 }}>
-              Curated resources from agricultural universities, government departments, research institutions, and Krishi Vigyan Kendras (KVKs).
+              Curated learning materials from agricultural universities, government departments, research institutions, and Krishi Vigyan Kendras (KVKs).
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
             <BulletList items={[
-              "Step-by-step farming tutorials",
-              "Seasonal crop planning guides",
-              "Best practice recommendations",
-              "Technology adoption manuals",
+              "Step-by-step farming guides for every season",
+              "Seasonal crop planning and advisory resources",
+              "Best practice recommendations from trusted institutions",
+              "Research publications and field study findings",
             ]} />
           </FadeIn>
         </AgriSplit>
@@ -274,18 +274,18 @@ export default function Services() {
           </FadeIn>
           <FadeIn delay={0.1}>
             <h3 className="display-font text-4xl font-bold mb-3 text-white leading-tight">
-              Government <span style={{ color: "#22c55e" }}>Schemes</span>
+              Farmer Support <span style={{ color: "#22c55e" }}>Programs</span>
             </h3>
             <p className="text-zinc-500 text-sm mb-8" style={{ fontWeight: 300 }}>
-              Navigate subsidies, insurance programs, and state support with ease.
+              Stay informed about government initiatives, welfare programs, and financial support available to farmers across India.
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
             <BulletList items={[
-              "Central & state-level agriculture schemes",
-              "Drone & equipment subsidies",
-              "Crop insurance programs",
-              "Application guidance & eligibility details",
+              "Exploring central and state-level agriculture schemes",
+              "Understanding subsidies available for farming equipment",
+              "Learning about crop insurance and loss protection programs",
+              "Guidance on eligibility checks and how to apply",
             ]} />
           </FadeIn>
         </AgriSplit>
@@ -305,17 +305,17 @@ export default function Services() {
           <div className="relative z-10 max-w-2xl mx-auto">
             <FadeIn>
               <p className="text-green-400 tracking-widest text-xs uppercase mb-5 font-medium" style={{ letterSpacing: "0.22em" }}>
-                Coming Soon
+                Always Growing
               </p>
             </FadeIn>
             <FadeIn delay={0.1}>
               <h3 className="display-font text-4xl md:text-5xl font-bold mb-6 text-white leading-tight">
-                The Future of <span style={{ color: "#22c55e", textShadow: "0 0 30px rgba(34,197,94,0.3)" }}>Smart Farming</span>
+                More Knowledge, <span style={{ color: "#22c55e", textShadow: "0 0 30px rgba(34,197,94,0.3)" }}>Always Free</span>
               </h3>
             </FadeIn>
             <FadeIn delay={0.2}>
               <p className="text-zinc-400 text-base leading-relaxed" style={{ fontWeight: 300 }}>
-                We are actively building the platform and drone systems. Every service listed here will be live — designed for the farmer who deserves better tools.
+                We are continuously expanding CropYaan's knowledge hub — adding new guides, scheme updates, weather resources, and crop advisories so that every farmer always has access to reliable, up-to-date information.
               </p>
             </FadeIn>
           </div>
