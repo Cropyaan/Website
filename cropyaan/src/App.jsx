@@ -8,6 +8,7 @@ import HowItWorks from "./components/HowItWorks";
 import WeatherAdvisory from "./components/WeatherAdvisory";
 import Contact from "./components/Contact";
 import Login from "./components/Login";
+import "./cssPages/Variable.css";
 
 function App() {
   const location = useLocation();
