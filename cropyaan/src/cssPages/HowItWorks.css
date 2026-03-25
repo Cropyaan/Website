@@ -1,0 +1,89 @@
+/* Fonts & Root Variables */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --surface-bg: #f8fafc;
+  --surface-bg-cc: rgba(248, 250, 252, 0.80);
+  --surface-bg-88: rgba(248, 250, 252, 0.53);
+  --image-overlay: rgba(0, 0, 0, 0.18);
+  --green-primary: #22c55e;
+  --green-glow: rgba(34, 197, 94, 0.35);
+}
+
+.dark {
+  --surface-bg: #0a0a0a;
+  --surface-bg-cc: rgba(10, 10, 10, 0.80);
+  --surface-bg-88: rgba(10, 10, 10, 0.53);
+  --image-overlay: rgba(0, 0, 0, 0.45);
+}
+
+.hiw-root {
+  font-family: 'DM Sans', sans-serif;
+}
+
+.display-font {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Grain Overlay */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+}
+
+/* Step Card Styles */
+.step-card-container {
+  background: var(--surface-bg);
+  transition: border-color 0.4s, box-shadow 0.4s;
+}
+
+.step-image-wrapper {
+  min-height: 260px;
+}
+
+.step-bg-image {
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s ease;
+}
+
+.step-number-watermark {
+  font-size: clamp(80px, 14vw, 140px);
+  color: rgba(34, 197, 94, 0.07);
+  bottom: -12px;
+  line-height: 1;
+  font-family: 'Playfair Display', serif;
+}
+
+.glow-orb {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--green-5) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  filter: blur(40px);
+  transition: opacity 0.4s;
+}
+
+.step-line-indicator {
+  background: linear-gradient(to right, var(--green-primary), transparent);
+  transition: width 0.5s ease;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+}
+
+/* Section Decor */
+.hero-vignette {
+  background: linear-gradient(to bottom, var(--surface-bg) 0%, transparent 40%, transparent 60%, var(--surface-bg) 100%);
+}
+
+.grid-overlay {
+  background-image: repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(34, 197, 94, 0.013) 80px, rgba(34, 197, 94, 0.013) 81px), 
+                    repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(34, 197, 94, 0.013) 80px, rgba(34, 197, 94, 0.013) 81px);
+}

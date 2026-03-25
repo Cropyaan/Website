@@ -1,0 +1,98 @@
+/* ============================================================
+   About.css — page-specific styles only
+   All variables are defined in index.css
+   ============================================================ */
+
+/* Glow Card */
+.glow-card {
+  background: var(--overlay-25);
+  border: 1px solid var(--overlay-10);
+  transition: box-shadow 0.4s, border-color 0.4s;
+}
+
+.glow-card:hover {
+  box-shadow: 0 0 0 1px var(--green-25), 0 8px 48px rgba(34, 197, 94, 0.1);
+  border-color: var(--green-25);
+}
+
+/* Offer card */
+.offer-card {
+  background: var(--overlay-25);
+  border: 1px solid var(--overlay-10);
+  transition: box-shadow 0.4s, border-color 0.4s;
+}
+
+.offer-card:hover {
+  border-color: var(--green-25);
+}
+
+.offer-card:hover .offer-card-title {
+  color: #22c55e;
+}
+
+.offer-card-bar {
+  width: 4px;
+  height: 28px;
+  border-radius: 9999px;
+  background: #22c55e;
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.5);
+  transition: height 0.3s;
+}
+
+.offer-card:hover .offer-card-bar {
+  height: 36px;
+}
+
+.offer-card-arrow {
+  transition: transform 0.3s;
+  display: inline-block;
+}
+
+.offer-card:hover .offer-card-arrow {
+  transform: scale(1.1);
+}
+
+/* Conviction card */
+.conviction-card {
+  background: var(--overlay-2);
+  border: 1px solid var(--overlay-6);
+  transition: all 0.4s;
+}
+
+.conviction-card:hover {
+  background: var(--green-4);
+  border-color: var(--green-20);
+  box-shadow: 0 0 40px rgba(34, 197, 94, 0.07);
+}
+
+.conviction-card:hover .conviction-card-title {
+  color: #22c55e;
+}
+
+.conviction-bar {
+  width: 56px;
+  height: 2px;
+  border-radius: 9999px;
+  background: #22c55e;
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.5);
+  transition: width 0.5s;
+  margin: 0 auto;
+}
+
+.conviction-card:hover .conviction-bar {
+  width: 80px;
+}
+
+/* Bullet Row */
+.bullet-row { transition: all 0.3s; }
+.bullet-dot { transition: all 0.3s; }
+.bullet-text { transition: color 0.3s; }
+
+.bullet-row:hover .bullet-dot {
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.9);
+  transform: scale(1.3);
+}
+
+.bullet-row:hover .bullet-text {
+  color: var(--color-text);
+}

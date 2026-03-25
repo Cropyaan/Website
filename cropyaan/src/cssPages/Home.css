@@ -1,0 +1,163 @@
+/* ============================================================
+   Home.css — page-specific styles only
+   Fonts, variables, and .display-font are in index.css
+   ============================================================ */
+
+/* ─── Hero overlay ───
+   Light mode: white wash to lift the dark photo.
+   Dark mode: dark vignette to darken the photo. */
+.hero-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0.42) 40%,
+    var(--bg-main) 100%
+  );
+}
+
+.dark .hero-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.45) 0%,
+    rgba(0, 0, 0, 0.60) 40%,
+    var(--bg-main) 100%
+  );
+}
+
+/* ─── Section vignette ─── */
+.section-vignette {
+  background: linear-gradient(
+    to bottom,
+    var(--bg-main) 0%,
+    transparent 25%,
+    transparent 75%,
+    var(--bg-main) 100%
+  );
+}
+
+/* ─── Grain overlay ─── */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+}
+
+/* ─── Separator ─── */
+.separator {
+  height: 1px;
+  width: 100%;
+  background: var(--sep-grad);
+}
+
+/* ─── Buttons ─── */
+.primary-btn {
+  background: #22c55e;
+  color: #000;
+  box-shadow: 0 0 32px rgba(34, 197, 94, 0.4);
+  letter-spacing: 0.05em;
+  transition: all 0.3s;
+}
+
+.primary-btn:hover {
+  background: #16a34a;
+  box-shadow: 0 0 48px rgba(34, 197, 94, 0.6);
+}
+
+.secondary-btn {
+  background: var(--overlay-7);
+  border: 1px solid var(--overlay-15);
+  color: var(--color-text);
+  letter-spacing: 0.05em;
+  transition: all 0.3s;
+}
+
+.secondary-btn:hover {
+  border-color: rgba(34, 197, 94, 0.4);
+  background: var(--green-8);
+}
+
+.cta-btn {
+  background: #22c55e;
+  color: #000;
+  box-shadow: 0 0 40px rgba(34, 197, 94, 0.4);
+  letter-spacing: 0.06em;
+  transition: all 0.3s;
+}
+
+.cta-btn:hover {
+  background: #16a34a;
+  box-shadow: 0 0 60px rgba(34, 197, 94, 0.6);
+}
+
+/* Weather banner button — moved from inline onMouseEnter/Leave */
+.weather-btn {
+  background: #22c55e;
+  color: #000;
+  letter-spacing: 0.05em;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.weather-btn:hover {
+  background: #16a34a;
+}
+
+/* ─── Cards ─── */
+.card {
+  background: var(--bg-main);
+  border: 1px solid var(--overlay-10);
+  box-shadow: 0 8px 40px var(--overlay-5);
+  transition: all 0.4s;
+}
+
+.card:hover {
+  background: var(--green-4);
+  border-color: var(--green-25);
+  box-shadow: 0 0 40px rgba(34, 197, 94, 0.07);
+}
+
+/* ─── Feature card title color on hover ─── */
+.feature-card-title {
+  color: var(--color-text);
+  transition: color 0.3s;
+}
+
+.card:hover .feature-card-title {
+  color: #22c55e;
+}
+
+/* ─── Feature card bar width on hover ─── */
+.feature-card-bar {
+  height: 2px;
+  width: 40px;
+  border-radius: 9999px;
+  background: #22c55e;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+  transition: width 0.4s;
+}
+
+.card:hover .feature-card-bar {
+  width: 56px;
+}
+
+/* ─── Resource link rows ─── */
+.resource-link {
+  background: var(--bg-main);
+  border: 1px solid var(--overlay-10);
+  text-decoration: none;
+  transition: all 0.35s;
+  display: flex;
+}
+
+.resource-link:hover {
+  border-color: var(--green-30);
+  background: var(--green-5);
+}
