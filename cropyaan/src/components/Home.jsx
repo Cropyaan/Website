@@ -279,7 +279,7 @@ export default function Home() {
                   ].map((item, i) => (
                     <FadeIn key={i} delay={0.35 + i * 0.08}>
                       <a href={item.href} target="_blank" rel="noopener noreferrer" className="resource-link rounded-xl px-5 py-4">
-                        <div style={{ marginTop: 6, flexShrink: 0, width: 8, height: 8, borderRadius: "50%", background: "#22c55e", boxShadow: "0 0 8px rgba(34,197,94,0.6)" }} />
+                        <div className="dot" />
                         <div>
                           <div className="text-sm font-semibold mb-0.5" style={{ color: "var(--color-text)" }}>
                             {item.labelKey}
@@ -298,10 +298,10 @@ export default function Home() {
               <div className="absolute inset-0 rounded-2xl" style={{ background: "radial-gradient(circle at 60% 40%, var(--green-8) 0%, transparent 70%)" }} />
               <div className="grid grid-cols-2 gap-4">
                 {[
-                  { titleKey: "home.card1_title", descKey: "home.card1_desc", href: "https://mkisan.gov.in" },
-                  { titleKey: "home.card2_title", descKey: "home.card2_desc", href: "https://mausam.imd.gov.in" },
-                  { titleKey: "home.card3_title", descKey: "home.card3_desc", href: "https://agmarknet.gov.in" },
-                  { titleKey: "home.card4_title", descKey: "home.card4_desc", href: "https://icar.org.in" },
+                  { titleKey: "home.card1_title", descKey: "home.card1_desc", href: "https://kisansuvidha.gov.in" },
+                  { titleKey: "home.card2_title", descKey: "home.card2_desc", href: "https://enam.gov.in" },  
+                  { titleKey: "home.card3_title", descKey: "home.card3_desc", href: "https://pmfby.gov.in" },
+                  { titleKey: "home.card4_title", descKey: "home.card4_desc", href: "https://upag.gov.in" },
                 ].map((item, i) => (
                   <FadeIn key={i} delay={i * 0.1}>
                     <a href={item.href} target="_blank" rel="noopener noreferrer" className="card block rounded-xl p-6" style={{ textDecoration: "none" }}>

@@ -75,6 +75,7 @@
     "link4_desc": "View daily mandi prices, market trends, and commodity data across India.",
     "link5_title": "Agricultural Research & Innovation (ICAR)",
     "link5_desc": "Explore research, technologies, and advancements in agriculture from ICAR.",
+    
     "res1_label": "SMS Advisory Services (mKisan)",
     "res1_desc": "Get real-time farming advice and updates directly via SMS from agricultural experts.",
     
@@ -90,14 +91,18 @@
     "res5_label": "Agricultural Research & Innovation (ICAR)",
     "res5_desc": "Explore research, technologies, and advancements in agriculture from ICAR.",
     
-    "card1_title": "Farmer Advisory Services",
-    "card1_desc": "Government advisory alerts and farming guidance on crops, weather, and best practices.",
-    "card2_title": "Weather Forecasts",
-    "card2_desc": "Localised weather updates to help plan sowing, irrigation, and harvesting effectively.",
-    "card3_title": "Market Price Tracking",
-    "card3_desc": "Up-to-date mandi prices and market trends to maximise returns at the right time.",
-    "card4_title": "Sustainable Practices",
-    "card4_desc": "Eco-friendly farming methods that improve long-term soil health and crop productivity.",
+    "card1_title": "Kisan Suvidha Services",
+    "card1_desc": "Access weather updates, market prices, plant protection tips, and advisory services for farmers.",
+
+    "card2_title": "eNAM Market Platform",
+    "card2_desc": "Online trading platform for agricultural commodities connecting farmers to buyers across India.",
+
+    "card3_title": "Crop Insurance (PMFBY)",
+    "card3_desc": "Insurance scheme providing financial protection to farmers against crop loss due to natural calamities.",
+
+    "card4_title": "Unified Portal for Agriculture",
+    "card4_desc": "Central platform providing government agricultural services, schemes, and farmer support.",
+    
     "cardFindings_title": "🌱 Compiled Findings ↗",
     "cardFindings_desc": "View all these findings at one place.",
     "guides_title1": "Guides &",

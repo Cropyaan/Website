@@ -1,25 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
 
-/* .navbar-container {
+.navbar-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
-  font-family: 'DM Sans', sans-serif;
-  transition: transform 0.4s ease, opacity 0.4s ease, background-color 0.4s ease;
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  background: var(--navbar-bg);
-  border-bottom: 1px solid var(--navbar-border);
-  color: var(--navbar-text);
-} */
- .navbar-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
+
+  /* Combined transitions (FIX) */
+  transition: 
+    transform 0.6s ease-in-out,
+    opacity 0.6s ease-in-out,
+    background 0.4s ease,
+    border-color 0.4s ease;
   
   /* THE FIX: Use the variable from Variables.css */
   background: var(--navbar-bg);
@@ -30,9 +23,6 @@
   
   /* Subtle border from your variables */
   border-bottom: 1px solid var(--navbar-border);
-  
-  /* Smooth transition for when you toggle themes */
-  transition: background 0.4s ease, border-color 0.4s ease;
 }
 
 
