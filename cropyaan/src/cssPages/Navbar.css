@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
+
+.navbar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  /* Combined transitions (FIX) */
+  transition: 
+    transform 0.6s ease-in-out,
+    opacity 0.6s ease-in-out,
+    background 0.4s ease,
+    border-color 0.4s ease;
+  
+  /* THE FIX: Use the variable from Variables.css */
+  background: var(--navbar-bg);
+  
+  /* Glass effect */
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  
+  /* Subtle border from your variables */
+  border-bottom: 1px solid var(--navbar-border);
+}
+
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Visibility states */
+.nav-hidden { transform: translateY(-100%); opacity: 0; }
+.nav-visible { transform: translateY(0); opacity: 1; }
+
+/* Logo */
+.nav-logo {
+  height: 55px;
+  transition: filter 0.3s ease;
+}
+.logo-invert { filter: brightness(0) invert(1); }
+
+/* Desktop Navigation */
+.nav-links-desktop {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .nav-links-desktop {
+    display: flex;
+    gap: 32px;
+  }
+}
+
+.nav-link {
+  color: var(--navbar-text);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: #22c55e;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #22c55e;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
+}
+
+/* Actions Section */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.theme-toggle-btn {
+  background: var(--overlay-10);
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Dropdowns */
+.nav-dropdown-wrapper {
+  position: relative;
+}
+
+.nav-dropdown-trigger {
+  background: none;
+  border: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.lang-code-text {
+  font-size: 14px;
+}
+
+.glass-card {
+  position: absolute;
+  top: 150%;
+  right: 0;
+  min-width: 140px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 12px;
+  padding: 8px;
+  background: var(--navbar-dropdown-bg);
+  border: 1px solid var(--navbar-border);
+  box-shadow: 0 10px 30px var(--navbar-shadow);
+  z-index: 1001;
+}
+
+.lang-option {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  text-align: left;
+  background: none;
+  border: none;
+  color: var(--color-text);
+  cursor: pointer;
+  font-size: 13px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.lang-option:hover {
+  background: rgba(34, 197, 94, 0.1);
+}
+
+.lang-option.active {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+/* Auth Section */
+.signin-link {
+  color: #22c55e;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.logout-btn {
+  width: 100%;
+  padding: 8px;
+  background: none;
+  border: none;
+  color: #f87171;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  border-radius: 6px;
+}
+
+.logout-btn:hover {
+  background: rgba(248, 113, 113, 0.1);
+}
+
+/* Mobile Toggle */
+.mobile-toggle-btn {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .mobile-toggle-btn {
+    display: none;
+  }
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  padding: 24px;
+  background: var(--navbar-mobile-bg);
+  backdrop-filter: blur(15px);
+  border-top: 1px solid var(--navbar-border);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: slideDown 0.3s ease-out;
+}
+
+.mobile-nav-link {
+  display: block;
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.mobile-nav-link.active {
+  color: #22c55e;
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

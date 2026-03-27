@@ -1,78 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=DM+Sans:wght@300;400;500;600&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
 @layer base {
+  /* ============================================================
+     LIGHT MODE (default)
+     ============================================================ */
   :root {
-    --bg-main: #ffffff; /* White cards to pop against the grey background */
-    --bg-main-cc: rgba(255, 255, 255, 0.8);
-    --bg-main-88: rgba(226, 232, 240, 0.7); /* slate-200 for depth in gradients */
-    
-    /* Hero overlays remain dark for better image contrast */
-    --hero-overlay-1: rgba(0, 0, 0, 0.45);
-    --hero-overlay-2: rgba(0, 0, 0, 0.7);
-    
-    --color-text: #0f172a; /* slate-900 */
-    --color-text-muted: #64748b; /* slate-500 */
-    /* Light mode overlays */
-    --overlay-2: rgba(0, 0, 0, 0.02);
-    --overlay-25: rgba(0, 0, 0, 0.03);
-    --overlay-5: rgba(0, 0, 0, 0.05);
-    --overlay-6: rgba(0, 0, 0, 0.06);
-    --overlay-7: rgba(0, 0, 0, 0.08); /* borders */
-    --overlay-10: rgba(0, 0, 0, 0.08);
-    --overlay-15: rgba(0, 0, 0, 0.12);
-    --overlay-80: rgba(255, 255, 255, 0.85); /* Bright frosted glass for navbar */
-    /* Light mode green tint for hover states (needs to be slightly darker) */
-    --green-4: rgba(34, 197, 94, 0.06);
-    --green-5: rgba(34, 197, 94, 0.08);
-    --green-8: rgba(34, 197, 94, 0.1);
-    --green-20: rgba(34, 197, 94, 0.3);
-    --green-25: rgba(34, 197, 94, 0.4);
-    --green-30: rgba(34, 197, 94, 0.5);
-    
-    --sep-grad: linear-gradient(90deg, transparent 0%, rgba(34,197,94,0.6) 30%, rgba(34,197,94,0.9) 50%, rgba(34,197,94,0.6) 70%, transparent 100%);
+    /* 1. Main Backgrounds */
+    --bg-main: #f5f6f1;
+    --bg-main-cc: rgba(245, 246, 241, 0.8);
+    --bg-main-88: rgba(226, 232, 240, 0.7);
+    --surface-bg: #f5f6f1;
+    --surface-bg-cc: rgba(245, 246, 241, 0.8);
+    --surface-bg-88: rgba(245, 246, 241, 0.533);
+
+    /* 2. Hero Overlays — light mode uses a WHITE wash to lift the photo */
+    --hero-overlay-1: rgba(255, 255, 255, 0.28);
+    --hero-overlay-2: rgba(255, 255, 255, 0.42);
+    --hero-overlay-top: rgba(255, 255, 255, 0.28);
+    --hero-overlay-mid: rgba(255, 255, 255, 0.42);
+
+    /* 3. Image Overlay — used on background section images (opacity tint) */
+    --image-overlay: rgba(0, 0, 0, 0.08);
+
+    /* 3. Text Colors */
+    --color-text: #0f172a;
+    --color-text-muted: #64748b;
+
+    /* 4. Black Overlays — for subtle borders, card surfaces, dividers */
+    --overlay-2:   rgba(0, 0, 0, 0.02);
+    --overlay-25:  rgba(0, 0, 0, 0.025);
+    --overlay-5:   rgba(0, 0, 0, 0.05);
+    --overlay-6:   rgba(0, 0, 0, 0.06);
+    --overlay-7:   rgba(0, 0, 0, 0.07);
+    --overlay-10:  rgba(0, 0, 0, 0.10);
+    --overlay-15:  rgba(0, 0, 0, 0.15);
+    --overlay-80:  rgba(0, 0, 0, 0.80);
+
+    /* 5. White Overlays — for glass/highlight effects */
+    --white-overlay-2:   rgba(255, 255, 255, 0.02);
+    --white-overlay-25:  rgba(255, 255, 255, 0.025);
+    --white-overlay-5:   rgba(255, 255, 255, 0.05);
+    --white-overlay-6:   rgba(255, 255, 255, 0.06);
+    --white-overlay-7:   rgba(255, 255, 255, 0.07);
+    --white-overlay-10:  rgba(255, 255, 255, 0.10);
+    --white-overlay-15:  rgba(255, 255, 255, 0.15);
+    --white-overlay-30:  rgba(255, 255, 255, 0.30);
+    --white-overlay-50:  rgba(255, 255, 255, 0.50);
+    --white-overlay-80:  rgba(255, 255, 255, 0.80);
+
+    /* 6. Brand Green Accents */
+    --green-4:   rgba(34, 197, 94, 0.06);
+    --green-5:   rgba(34, 197, 94, 0.08);
+    --green-8:   rgba(34, 197, 94, 0.10);
+    --green-20:  rgba(34, 197, 94, 0.30);
+    --green-25:  rgba(34, 197, 94, 0.40);
+    --green-30:  rgba(34, 197, 94, 0.50);
+
+    /* 7. Separator */
+    --sep-grad: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(34, 197, 94, 0.4) 30%,
+      rgba(34, 197, 94, 0.7) 50%,
+      rgba(34, 197, 94, 0.4) 70%,
+      transparent 100%
+    );
+
+    /* 8. Navbar */
+    --navbar-bg:          rgba(245, 246, 241, 0.88);
+    --navbar-border:      rgba(0, 0, 0, 0.08);
+    --navbar-dropdown-bg: rgba(245, 246, 241, 0.97);
+    --navbar-mobile-bg:   rgba(245, 246, 241, 0.97);
+    --navbar-shadow:      rgba(0, 0, 0, 0.08);
+    --navbar-text:        #0f172a;
   }
 
+  /* ============================================================
+     DARK MODE
+     ============================================================ */
   .dark {
+    /* 1. Main Backgrounds */
     --bg-main: #0a0a0a;
-    --bg-main-cc: #0a0a0acc;
-    --bg-main-88: #0a0a0a88;
-    --hero-overlay-1: rgba(0, 0, 0, 0.3);
-    --hero-overlay-2: rgba(0, 0, 0, 0.55);
+    --bg-main-cc: rgba(10, 10, 10, 0.8);
+    --bg-main-88: rgba(10, 10, 10, 0.533);
+    --surface-bg: #0a0a0a;
+    --surface-bg-cc: rgba(10, 10, 10, 0.8);
+    --surface-bg-88: rgba(10, 10, 10, 0.533);
+
+    /* 2. Hero Overlays — dark mode uses a BLACK tint to darken the photo */
+    --hero-overlay-1: rgba(0, 0, 0, 0.30);
+    --hero-overlay-2: rgba(0, 0, 0, 0.50);
+    --hero-overlay-top: rgba(0, 0, 0, 0.30);
+    --hero-overlay-mid: rgba(0, 0, 0, 0.50);
+
+    /* 3. Image Overlay */
+    --image-overlay: rgba(0, 0, 0, 0.25);
+
+    /* 3. Text Colors */
     --color-text: #ffffff;
-    --color-text-muted: #a1a1aa; /* zinc-400 */
-    /* Dark mode overlays (using white with low opacity) */
-    --overlay-2: rgba(255, 255, 255, 0.02);
-    --overlay-25: rgba(255, 255, 255, 0.025);
-    --overlay-5: rgba(255, 255, 255, 0.05);
-    --overlay-6: rgba(255, 255, 255, 0.06);
-    --overlay-7: rgba(255, 255, 255, 0.07);
-    --overlay-10: rgba(255, 255, 255, 0.1);
-    --overlay-15: rgba(255, 255, 255, 0.15);
-    --overlay-80: rgba(255, 255, 255, 0.8);
-    /* Dark mode green tint */
-    --green-4: rgba(34, 197, 94, 0.04);
-    --green-5: rgba(34, 197, 94, 0.05);
-    --green-8: rgba(34, 197, 94, 0.08);
-    --green-20: rgba(34, 197, 94, 0.2);
-    --green-25: rgba(34, 197, 94, 0.25);
-    --green-30: rgba(34, 197, 94, 0.3);
-    
-    --sep-grad: linear-gradient(90deg, transparent 0%, #22c55e44 30%, #22c55e88 50%, #22c55e44 70%, transparent 100%);
+    --color-text-muted: #a1a1aa;
+
+    /* 4. Black Overlays — flipped to white in dark mode for visible borders/surfaces */
+    --overlay-2:   rgba(255, 255, 255, 0.02);
+    --overlay-25:  rgba(255, 255, 255, 0.025);
+    --overlay-5:   rgba(255, 255, 255, 0.05);
+    --overlay-6:   rgba(255, 255, 255, 0.06);
+    --overlay-7:   rgba(255, 255, 255, 0.07);
+    --overlay-10:  rgba(255, 255, 255, 0.10);
+    --overlay-15:  rgba(255, 255, 255, 0.15);
+    --overlay-80:  rgba(255, 255, 255, 0.80);
+
+    /* 5. White Overlays */
+    --white-overlay-2:   rgba(255, 255, 255, 0.02);
+    --white-overlay-25:  rgba(255, 255, 255, 0.025);
+    --white-overlay-5:   rgba(255, 255, 255, 0.05);
+    --white-overlay-6:   rgba(255, 255, 255, 0.06);
+    --white-overlay-7:   rgba(255, 255, 255, 0.07);
+    --white-overlay-10:  rgba(255, 255, 255, 0.10);
+    --white-overlay-15:  rgba(255, 255, 255, 0.15);
+    --white-overlay-30:  rgba(255, 255, 255, 0.30);
+    --white-overlay-50:  rgba(255, 255, 255, 0.50);
+    --white-overlay-80:  rgba(255, 255, 255, 0.80);
+
+    /* 6. Brand Green Accents */
+    --green-4:   rgba(34, 197, 94, 0.04);
+    --green-5:   rgba(34, 197, 94, 0.05);
+    --green-8:   rgba(34, 197, 94, 0.08);
+    --green-20:  rgba(34, 197, 94, 0.20);
+    --green-25:  rgba(34, 197, 94, 0.25);
+    --green-30:  rgba(34, 197, 94, 0.30);
+
+    /* 7. Separator */
+    --sep-grad: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(34, 197, 94, 0.267) 30%,
+      rgba(34, 197, 94, 0.533) 50%,
+      rgba(34, 197, 94, 0.267) 70%,
+      transparent 100%
+    );
+
+    /* 8. Navbar */
+    --navbar-bg:          rgba(10, 10, 10, 0.75);
+    --navbar-border:      rgba(255, 255, 255, 0.07);
+    --navbar-dropdown-bg: rgba(18, 18, 18, 0.95);
+    --navbar-mobile-bg:   rgba(10, 10, 10, 0.97);
+    --navbar-shadow:      rgba(0, 0, 0, 0.40);
+    --navbar-text:        #ffffff;
   }
 
+  /* ============================================================
+     GLOBAL BASE STYLES
+     ============================================================ */
   body {
-    @apply bg-[var(--bg-main)] text-[var(--color-text)] transition-colors duration-300;
+    @apply transition-colors duration-300;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: var(--bg-main);
+    color: var(--color-text);
   }
+
+  /* Light mode body background */
   html:not(.dark) body {
-    background: linear-gradient(135deg, #f5f6f1 0%, #e9efe4 100%); /* Warm earthy soft sage/linen */
+    background: linear-gradient(135deg, #f5f6f1 0%, #e9efe4 100%);
     background-attachment: fixed;
+  }
+
+  /* Dark mode body background */
+  html.dark body {
+    background: #0a0a0a;
   }
 }
 
+/* ============================================================
+   GLOBAL RESETS
+   ============================================================ */
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
+}
+
+/* ============================================================
+   GLOBAL UTILITY CLASSES (shared across all pages)
+   ============================================================ */
+
+/* Typography */
+.display-font {
+  font-family: 'Playfair Display', serif;
+}
+
+.page-root {
+  font-family: 'DM Sans', sans-serif;
+  padding-top: 68px;
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
-
+import "../cssPages/WeatherAdvisory.css";
 const useInView = (threshold = 0.15) => {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
@@ -80,7 +80,7 @@ const StatCard = ({ icon, label, value, unit }) => (
     </div>
     <div>
       <p style={{ color: "rgba(113,113,122,0.9)", fontSize: "0.7rem", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: 6, fontWeight: 500 }}>{label}</p>
-      <p style={{ color: "#22c55e", fontSize: "2rem", fontFamily: "'Playfair Display', serif", fontWeight: 700, lineHeight: 1, textShadow: "0 0 20px rgba(34,197,94,0.3)" }}>
+      <p style={{ color: "#22c55e", fontSize: "2rem", fontFamily: "'Playfair Display', serif", fontWeight: 700, lineHeight: 1, textShadow: "0 0 20px var(--green-30)" }}>
         {value}
         <span style={{ fontSize: "1rem", color: "var(--color-text-muted)", fontFamily: "'DM Sans', sans-serif", fontWeight: 300, marginLeft: 4 }}>{unit}</span>
       </p>
@@ -91,7 +91,7 @@ const StatCard = ({ icon, label, value, unit }) => (
 const AdvisoryCard = ({ advisory, index }) => {
   const isWarning = advisory.type === "warning";
   return (
-    <div style={{ display: "flex", alignItems: "flex-start", gap: 16, background: isWarning ? "rgba(251,191,36,0.04)" : "var(--green-4)", border: isWarning ? "1px solid rgba(251,191,36,0.18)" : "1px solid rgba(34,197,94,0.2)", borderRadius: 12, padding: "16px 20px", animation: `fadeUp 0.6s ease ${index * 0.1}s both` }}>
+    <div style={{ display: "flex", alignItems: "flex-start", gap: 16, background: isWarning ? "rgba(251,191,36,0.04)" : "var(--green-4)", border: isWarning ? "1px solid rgba(251,191,36,0.18)" : "1px solid var(--green-20)", borderRadius: 12, padding: "16px 20px", animation: `fadeUp 0.6s ease ${index * 0.1}s both` }}>
       <div style={{ marginTop: 2, flexShrink: 0, width: 28, height: 28, borderRadius: "50%", background: isWarning ? "rgba(251,191,36,0.1)" : "rgba(34,197,94,0.1)", color: isWarning ? "#fbbf24" : "#22c55e", display: "flex", alignItems: "center", justifyContent: "center" }}>
         {isWarning ? <IconAlert /> : <IconLeaf />}
       </div>
@@ -113,9 +113,9 @@ export default function WeatherAdvisory() {
   const getAdvisory = ({ temp, rainProb, windSpeed }) => {
     const advisories = [];
     if (rainProb > 60) advisories.push({ type: "warning", title: t("weather.adv_rain_title"), text: t("weather.adv_rain_text") });
-    if (temp > 35)     advisories.push({ type: "warning", title: t("weather.adv_heat_title"), text: t("weather.adv_heat_text") });
+    if (temp > 35)      advisories.push({ type: "warning", title: t("weather.adv_heat_title"), text: t("weather.adv_heat_text") });
     if (windSpeed > 20) advisories.push({ type: "warning", title: t("weather.adv_wind_title"), text: t("weather.adv_wind_text") });
-    if (temp < 10)     advisories.push({ type: "warning", title: t("weather.adv_cold_title"), text: t("weather.adv_cold_text") });
+    if (temp < 10)      advisories.push({ type: "warning", title: t("weather.adv_cold_title"), text: t("weather.adv_cold_text") });
     if (advisories.length === 0) advisories.push({ type: "good", title: t("weather.adv_good_title"), text: t("weather.adv_good_text") });
     return advisories;
   };
@@ -146,17 +146,7 @@ export default function WeatherAdvisory() {
 
   return (
     <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .wa-input:focus { outline: none; border-color: rgba(34,197,94,0.5) !important; box-shadow: 0 0 0 3px rgba(34,197,94,0.08); }
-        .wa-input::placeholder { color: rgba(113,113,122,0.6); }
-        .wa-btn:hover { background: #16a34a !important; box-shadow: 0 0 32px rgba(34,197,94,0.5) !important; }
-      `}</style>
       <GrainOverlay />
-
       <div style={{ background: "var(--bg-main)", minHeight: "100vh", fontFamily: "'DM Sans', sans-serif", color: "var(--color-text)", paddingTop: 100 }}>
 
         {/* HERO */}
@@ -227,8 +217,6 @@ export default function WeatherAdvisory() {
         {weather && (
           <>
             <Separator />
-
-            {/* Stat Cards */}
             <section style={{ padding: "52px 24px", maxWidth: 900, margin: "0 auto" }}>
               <FadeIn>
                 <p style={{ color: "#22c55e", fontSize: "0.7rem", letterSpacing: "0.22em", textTransform: "uppercase", fontWeight: 500, marginBottom: 8 }}>
@@ -247,7 +235,6 @@ export default function WeatherAdvisory() {
 
             <Separator />
 
-            {/* Advisory */}
             <section style={{ padding: "52px 24px 80px", maxWidth: 900, margin: "0 auto" }}>
               <FadeIn>
                 <p style={{ color: "#22c55e", fontSize: "0.7rem", letterSpacing: "0.22em", textTransform: "uppercase", fontWeight: 500, marginBottom: 8 }}>
