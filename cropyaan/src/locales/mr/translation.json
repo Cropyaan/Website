@@ -1,7 +1,7 @@
 {
   "nav": {
     "home": "मुख्यपृष्ठ", "about": "आमच्याबद्दल", "services": "सेवा",
-    "how": "हे कसे कार्य करते", "weather": "हवामान सल्ला",
+    "how": "हे कसे कार्य करते", "weather": "AgriMap Insights",
     "contact": "संपर्क", "signin": "साइन इन", "signout": "साइन आउट",
     "signinreg": "साइन इन / नोंदणी", "signedin": "लॉग इन आहात"
   },
