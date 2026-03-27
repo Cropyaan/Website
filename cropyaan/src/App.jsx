@@ -5,7 +5,7 @@ import Home from "./components/Home";
 import About from "./components/About";
 import Services from "./components/Services";
 import HowItWorks from "./components/HowItWorks";
-import WeatherAdvisory from "./components/WeatherAdvisory";
+import AgriMapPage from "./pages/AgriMap";
 import Contact from "./components/Contact";
 import Login from "./components/Login";
 import "./cssPages/Variable.css";
@@ -39,7 +39,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
         <Route path="/how-it-works" element={<HowItWorks />} />
-        <Route path="/weather-advisory" element={<WeatherAdvisory />} />
+        <Route path="/weather-advisory" element={<AgriMapPage />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
       </Routes>

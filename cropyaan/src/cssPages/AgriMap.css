@@ -1,0 +1,360 @@
+@import 'leaflet/dist/leaflet.css';
+
+/* ── AgriMap Page Layout ── */
+.agrimap-page {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 70px); /* account for navbar */
+  padding-top: 70px;
+  font-family: 'Inter', 'DM Sans', sans-serif;
+}
+
+.agrimap-header {
+  padding: 0.75rem 1.5rem;
+  background: var(--bg-main, #fff);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 500;
+  flex-shrink: 0;
+}
+
+.agrimap-header h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #2e7d32;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.agrimap-header-search {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.agrimap-main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── Map ── */
+.agrimap-map-container {
+  flex: 2;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.agrimap-map-container .leaflet-container {
+  width: 100%;
+  height: 100%;
+}
+
+.agrimap-map-container .leaflet-pane {
+  z-index: 10;
+}
+
+.agrimap-map-container .leaflet-control-container {
+  z-index: 20;
+}
+
+/* ── Sidebar ── */
+.agrimap-info-sidebar {
+  flex: 1;
+  min-width: 300px;
+  max-width: 380px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 1.25rem;
+  overflow-y: auto;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.06);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ── Empty / Error States ── */
+.agrimap-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  color: #666;
+  animation: agrimap-fadeIn 0.4s ease;
+}
+
+.agrimap-empty-state svg {
+  color: #2e7d32;
+  opacity: 0.5;
+  margin-bottom: 1rem;
+}
+
+.agrimap-error-state {
+  padding: 1.5rem;
+  border: 1px solid #fee2e2;
+  border-radius: 12px;
+  background: #fffcfc;
+}
+
+/* ── Cards ── */
+.agrimap-info-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border-top: 4px solid #2e7d32;
+  animation: agrimap-fadeIn 0.4s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.agrimap-info-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.agrimap-info-card.agrimap-weather { border-top-color: #0288d1; }
+.agrimap-info-card.agrimap-soil    { border-top-color: #795548; }
+.agrimap-info-card.agrimap-crops   { border-top-color: #2e7d32; }
+
+.agrimap-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0.85rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.agrimap-card-header svg { width: 20px; height: 20px; }
+.agrimap-weather .agrimap-card-header svg { color: #0288d1; }
+.agrimap-soil    .agrimap-card-header svg { color: #795548; }
+.agrimap-crops   .agrimap-card-header svg { color: #2e7d32; }
+
+/* ── Weather Grid ── */
+.agrimap-weather-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  text-align: center;
+}
+
+.agrimap-weather-item {
+  background: #f8fafc;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.agrimap-weather-label {
+  font-size: 0.7rem;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.agrimap-weather-value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #333;
+}
+
+/* ── Pills ── */
+.agrimap-pill-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.agrimap-pill {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.agrimap-pill-profitable {
+  background: #fff8e1;
+  color: #f57f17;
+}
+
+.agrimap-soil-value {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+/* ── Loader ── */
+.agrimap-loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 12px;
+  color: #666;
+}
+
+.agrimap-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(46, 125, 50, 0.2);
+  border-top-color: #2e7d32;
+  border-radius: 50%;
+  animation: agrimap-spin 0.9s linear infinite;
+}
+
+@keyframes agrimap-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes agrimap-fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.agrimap-rotate {
+  animation: agrimap-spin 1s linear infinite;
+}
+
+/* ── Search Bar ── */
+.agrimap-search-container {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+}
+
+.agrimap-search-bar {
+  display: flex;
+  align-items: center;
+  background: #f1f5f9;
+  border-radius: 24px;
+  padding: 3px 6px;
+  transition: all 0.3s ease;
+}
+
+.agrimap-search-bar:focus-within {
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  outline: 2px solid #2e7d32;
+}
+
+.agrimap-search-input-wrapper {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  padding: 0 8px;
+}
+
+.agrimap-search-icon {
+  color: #666;
+  margin-right: 6px;
+  flex-shrink: 0;
+}
+
+.agrimap-search-input-wrapper input {
+  border: none;
+  background: transparent;
+  width: 100%;
+  padding: 9px 0;
+  font-size: 0.9rem;
+  color: #333;
+  outline: none;
+}
+
+.agrimap-clear-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #94a3b8;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.agrimap-clear-btn:hover {
+  background: #e2e8f0;
+  color: #333;
+}
+
+.agrimap-search-submit {
+  background: #2e7d32;
+  color: white;
+  border: none;
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  min-width: 72px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.agrimap-search-submit:hover:not(:disabled) {
+  background: #1b5e20;
+}
+
+.agrimap-search-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.agrimap-search-error {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 6px;
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  z-index: 10;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .agrimap-page {
+    height: auto;
+  }
+
+  .agrimap-main {
+    flex-direction: column-reverse;
+  }
+
+  .agrimap-info-sidebar {
+    max-width: none;
+    min-width: unset;
+    height: 45vh;
+    border-left: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .agrimap-map-container {
+    height: 45vh;
+  }
+
+  .agrimap-header {
+    flex-wrap: wrap;
+  }
+
+  .agrimap-header-search {
+    width: 100%;
+  }
+}
