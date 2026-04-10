@@ -323,5 +323,21 @@
     "cta_title1": "More Knowledge,",
     "cta_title2": "Always Free",
     "cta_subtitle": "We are continuously expanding CropYaan's knowledge hub — adding new guides, scheme updates, weather resources, and crop advisories so that every farmer always has access to reliable, up-to-date information."
+  },
+    "crops" : {
+    "rice": "Rice",
+    "wheat": "Wheat",
+    "maize": "Maize",
+    "cotton": "Cotton",
+    "sugarcane": "Sugarcane",
+    "barley": "Barley",
+    "millet": "Millet",
+    "groundnut": "Groundnut",
+    "soybean": "Soybean",
+    "mustard": "Mustard"
+  },
+  "season": {
+    "kharif": "Kharif",
+    "rabi": "Rabi"
   }
 }

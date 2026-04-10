@@ -9,16 +9,20 @@ import WeatherAdvisory from "./components/WeatherAdvisory";
 import Contact from "./components/Contact";
 import Login from "./components/Login";
 import "./cssPages/Variable.css";
+// import CropRecommendation from "./components/CropRecommendation";
+import CropAdvisor from "./components/CropAdvisor";
 
 function App() {
   const location = useLocation();
-  const [theme, setTheme] = useState("dark");
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) setTheme(savedTheme);
-  }, []);
+  // ✅ FIX: initialize from localStorage directly
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("theme") || "dark";
+  });
 
+  // ❌ REMOVED first useEffect
+
+  // ✅ keep this
   useEffect(() => {
     const root = document.documentElement;
     if (theme === "dark") {
@@ -42,6 +46,7 @@ function App() {
         <Route path="/weather-advisory" element={<WeatherAdvisory />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/crop-recommendation" element={<CropAdvisor />} />
       </Routes>
     </>
   );

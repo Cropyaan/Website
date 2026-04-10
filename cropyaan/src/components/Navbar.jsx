@@ -33,6 +33,7 @@ export default function Navbar({ theme, setTheme }) {
     { to: "/services", label: t("nav.services") },
     { to: "/how-it-works", label: t("nav.how") },
     { to: "/weather-advisory", label: t("nav.weather") },
+    { to: "/crop-recommendation", label: t("Crop Advisory") },
     { to: "/contact", label: t("nav.contact") },
   ];
 
