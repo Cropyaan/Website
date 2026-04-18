@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "../cssPages/HowItWorks.css";
+
 const useInView = (threshold = 0.15) => {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
@@ -49,8 +50,8 @@ const StepCard = ({ step, index }) => {
       <div
         className="step-card-container relative w-full grid lg:grid-cols-2 rounded-2xl overflow-hidden"
         style={{
-          border: hovered ? "1px solid var(--green-25)" : "1px solid var(--overlay-6)",
-          boxShadow: hovered ? "0 0 0 1px rgba(34,197,94,0.1), 0 16px 64px var(--green-8)" : "0 8px 40px var(--overlay-10)",
+          border: hovered ? "1px solid var(--card-hover)" : "1px solid var(--overlay-6)",
+          boxShadow: hovered ? "0 0 0 1px rgba(255,255,255,0.06), 0 16px 64px rgba(0,0,0,0.6)" : "0 8px 40px var(--overlay-10)",
         }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -64,36 +65,47 @@ const StepCard = ({ step, index }) => {
               transform: hovered ? "scale(1.08)" : "scale(1.05)",
             }}
           />
-          <div className="absolute inset-0" style={{ background: isEven ? "linear-gradient(to right, transparent 0%, var(--surface-bg) 100%)" : "linear-gradient(to left, transparent 0%, var(--surface-bg) 100%)" }} />
-          <div className="absolute inset-0 bg-[var(--image-overlay)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_100%,rgba(34,197,94,0.06)_0%,transparent_70%)]" />
-          <div className={`step-number-watermark absolute font-bold select-none pointer-events-none ${isEven ? "left-[12px]" : "right-[12px]"}`}>
+          {/* gradient fade toward content */}
+          <div className="absolute inset-0" style={{
+            background: isEven
+              ? "linear-gradient(to right, transparent 0%, var(--surface-bg) 100%)"
+              : "linear-gradient(to left, transparent 0%, var(--surface-bg) 100%)"
+          }} />
+          <div className="absolute inset-0" style={{ background: "rgba(10,10,10,0.25)" }} />
+          {/* Large step-number watermark */}
+          <div className={`step-number-watermark absolute font-bold select-none pointer-events-none ${isEven ? "left-[12px]" : "right-[12px]"}`}
+            style={{ fontFamily: "var(--font-display)" }}>
             {step.number}
           </div>
         </div>
 
         {/* Content side */}
-        <div className={`relative flex flex-col justify-center px-8 lg:px-12 py-12 ${isEven ? "" : "lg:order-1"}`}>
-          <div className="glow-orb absolute pointer-events-none" style={{ opacity: hovered ? 1 : 0.5 }} />
+        <div className={`relative flex flex-col justify-center px-8 lg:px-12 py-12 ${isEven ? "" : "lg:order-1"}`}
+          style={{ background: "var(--surface-bg)" }}>
+          <div className="glow-orb absolute pointer-events-none" style={{ opacity: hovered ? 1 : 0.4 }} />
           <div className="relative z-10">
+            {/* Step meta */}
             <div className="flex items-center gap-3 mb-5">
-              <span className="text-xs font-bold tracking-[0.2em] text-[#22c55e]">{step.number}</span>
-              <div className="w-px h-4 bg-[var(--green-30)]" />
-              <span className="text-xs tracking-[0.18em] uppercase font-medium text-green-500/70">{step.tag}</span>
+              <span className="text-xs font-bold tracking-[0.2em]" style={{ color: "var(--bw-mid)" }}>{step.number}</span>
+              <div className="w-px h-4" style={{ background: "rgba(255,255,255,0.15)" }} />
+              <span className="text-xs tracking-[0.18em] uppercase font-medium" style={{ color: "var(--bw-mid)", opacity: 0.7 }}>{step.tag}</span>
             </div>
+            {/* Title */}
             <h3
-              className="display-font text-3xl font-bold mb-4 leading-tight transition-all duration-350"
-              style={{ 
-                color: hovered ? "#22c55e" : "var(--color-text)", 
-                textShadow: hovered ? "0 0 24px var(--green-25)" : "none" 
+              className="display-font text-3xl font-bold mb-4 leading-tight"
+              style={{
+                color: hovered ? "var(--bw-pale)" : "var(--color-text)",
+                transition: "color 0.35s ease",
               }}
             >
               {step.title}
             </h3>
-            <p className="text-base leading-relaxed font-light text-[var(--color-text-muted)] transition-colors duration-350">
+            {/* Description */}
+            <p className="text-base leading-relaxed font-light" style={{ color: "var(--color-text-muted)", transition: "color 0.35s" }}>
               {step.desc}
             </p>
-            <div className="step-line-indicator mt-8 h-0.5 rounded-full" style={{ width: hovered ? "80px" : "40px" }} />
+            {/* Animated bottom line */}
+            <div className="step-line-indicator mt-8 h-0.5 rounded-full" style={{ width: hovered ? "80px" : "32px" }} />
           </div>
         </div>
       </div>
@@ -117,31 +129,42 @@ export default function HowItWorks() {
       <GrainOverlay />
       <div className="hiw-root dark:bg-[var(--bg-main)]">
 
-        {/* HERO */}
+        {/* ── HERO ── */}
         <section className="relative py-28 px-6 text-center overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none opacity-5 bg-center bg-cover" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1800&q=60')` }} />
+          <div
+            className="absolute inset-0 pointer-events-none bg-center bg-cover"
+            style={{
+              backgroundImage: `url('/assets/hiw-hero.jpg'), url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1800&q=60')`,
+              opacity: 0.04,
+              filter: "grayscale(100%)",
+            }}
+          />
           <div className="hero-vignette absolute inset-0 pointer-events-none" />
-          <div className="absolute pointer-events-none w-[700px] h-[300px] rounded-[50%] bg-[radial-gradient(ellipse,rgba(34,197,94,0.07)_0%,transparent_70%)] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 blur-[40px]" />
-          
+          <div className="absolute pointer-events-none" style={{
+            width: 700, height: 300,
+            borderRadius: "50%",
+            background: "radial-gradient(ellipse, rgba(255,255,255,0.025) 0%, transparent 70%)",
+            top: "50%", left: "50%",
+            transform: "translate(-50%,-50%)",
+            filter: "blur(40px)",
+          }} />
+
           <div className="relative z-10 max-w-3xl mx-auto">
-            <FadeIn>
-              <p className="text-green-400 tracking-[0.22em] text-xs uppercase mb-5 font-medium">{t("hiw.hero_tag")}</p>
-            </FadeIn>
             <FadeIn delay={0.1}>
-              <h2 className="display-font text-5xl md:text-6xl font-bold mb-6 text-slate-900 dark:text-white leading-tight">
+              <h2 className="display-font text-5xl md:text-6xl font-bold mb-6 leading-tight" style={{ color: "var(--color-text)" }}>
                 {t("hiw.hero_title1")}{" "}
-                <span className="text-[#22c55e] [text-shadow:0_0_40px_rgba(34,197,94,0.35)]">{t("hiw.hero_title2")}</span>
+                <span style={{ color: "var(--bw-pale)", fontStyle: "italic" }}>{t("hiw.hero_title2")}</span>
               </h2>
             </FadeIn>
             <FadeIn delay={0.2}>
-              <p className="text-slate-500 dark:text-zinc-400 text-lg font-light">{t("hiw.hero_subtitle")}</p>
+              <p className="text-lg font-light" style={{ color: "var(--color-text-muted)" }}>{t("hiw.hero_subtitle")}</p>
             </FadeIn>
           </div>
         </section>
 
         <Separator />
 
-        {/* STEPS */}
+        {/* ── STEPS ── */}
         <section className="py-20 px-6 lg:px-20 relative">
           <div className="grid-overlay absolute inset-0 pointer-events-none" />
           <div className="max-w-6xl mx-auto relative z-10 space-y-8">
@@ -153,20 +176,37 @@ export default function HowItWorks() {
 
         <Separator />
 
-        {/* CLOSING */}
+        {/* ── CLOSING ── */}
         <section className="py-24 px-6 text-center relative overflow-hidden">
-          <div className="absolute pointer-events-none w-[600px] h-[300px] rounded-[50%] bg-[radial-gradient(ellipse,rgba(34,197,94,0.07)_0%,transparent_70%)] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 blur-[50px]" />
+          <div className="absolute pointer-events-none" style={{
+            width: 600, height: 300,
+            borderRadius: "50%",
+            background: "radial-gradient(ellipse, rgba(255,255,255,0.025) 0%, transparent 70%)",
+            top: "50%", left: "50%",
+            transform: "translate(-50%,-50%)",
+            filter: "blur(50px)",
+          }} />
           <div className="relative z-10 max-w-2xl mx-auto">
             <FadeIn>
-              <p className="text-green-400 tracking-[0.22em] text-xs uppercase mb-5 font-medium">{t("hiw.closing_tag")}</p>
+              <p style={{
+                fontSize: "0.68rem",
+                letterSpacing: "0.22em",
+                textTransform: "uppercase",
+                color: "var(--bw-mid)",
+                marginBottom: "1.25rem",
+                fontWeight: 500,
+              }}>
+                {t("hiw.closing_tag")}
+              </p>
             </FadeIn>
             <FadeIn delay={0.1}>
-              <h3 className="display-font text-4xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white leading-tight">
-                {t("hiw.closing_title1")} <span className="text-[#22c55e] [text-shadow:0_0_30px_var(--green-30)]">{t("hiw.closing_title2")}</span>
+              <h3 className="display-font text-4xl md:text-5xl font-bold mb-6 leading-tight" style={{ color: "var(--color-text)" }}>
+                {t("hiw.closing_title1")}{" "}
+                <span style={{ color: "var(--bw-pale)", fontStyle: "italic" }}>{t("hiw.closing_title2")}</span>
               </h3>
             </FadeIn>
             <FadeIn delay={0.2}>
-              <p className="text-slate-500 dark:text-zinc-400 text-base leading-relaxed font-light">{t("hiw.closing_subtitle")}</p>
+              <p className="text-base leading-relaxed font-light" style={{ color: "var(--color-text-muted)" }}>{t("hiw.closing_subtitle")}</p>
             </FadeIn>
           </div>
         </section>

@@ -8,21 +8,17 @@ import HowItWorks from "./components/HowItWorks";
 import WeatherAdvisory from "./components/WeatherAdvisory";
 import Contact from "./components/Contact";
 import Login from "./components/Login";
-import "./cssPages/Variable.css";
-// import CropRecommendation from "./components/CropRecommendation";
 import CropAdvisor from "./components/CropAdvisor";
+import ScrollToTop from "./components/ScrollToTop"; // ✅ ADDED
+import "./cssPages/Variable.css";
 
 function App() {
   const location = useLocation();
 
-  // ✅ FIX: initialize from localStorage directly
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem("theme") || "dark";
   });
 
-  // ❌ REMOVED first useEffect
-
-  // ✅ keep this
   useEffect(() => {
     const root = document.documentElement;
     if (theme === "dark") {
@@ -35,9 +31,12 @@ function App() {
 
   return (
     <>
+      <ScrollToTop /> {/* ✅ ADDED HERE */}
+
       {location.pathname !== "/login" && (
         <Navbar theme={theme} setTheme={setTheme} />
       )}
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />

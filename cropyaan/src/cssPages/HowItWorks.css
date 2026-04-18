@@ -1,89 +1,291 @@
-/* Fonts & Root Variables */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
+/* ============================================================
+   HowItWorks.css — Cropyaan refined styles
+   Monochrome: #000, #fff, #333, #E5E5E5, #F8F8F8
+   Fonts: Montserrat (display) + Inter (body)
+   ============================================================ */
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;0,700;0,800;1,700&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ─── Variables ─── */
 :root {
-  --surface-bg: #f8fafc;
-  --surface-bg-cc: rgba(248, 250, 252, 0.80);
-  --surface-bg-88: rgba(248, 250, 252, 0.53);
-  --image-overlay: rgba(0, 0, 0, 0.18);
-  --green-primary: #22c55e;
-  --green-glow: rgba(34, 197, 94, 0.35);
+  --bg-hiw:           #F8F8F8;
+  --color-hiw-text:   #000000;
+  --color-hiw-muted:  #555555;
+  --border-hiw:       #E5E5E5;
+  --card-hiw-bg:      #FFFFFF;
+  --sep-grad-hiw:     linear-gradient(to right, transparent, #D0D0D0 30%, #D0D0D0 70%, transparent);
+  --image-overlay-hiw:rgba(0,0,0,0.15);
 }
 
 .dark {
-  --surface-bg: #0a0a0a;
-  --surface-bg-cc: rgba(10, 10, 10, 0.80);
-  --surface-bg-88: rgba(10, 10, 10, 0.53);
-  --image-overlay: rgba(0, 0, 0, 0.45);
+  --bg-hiw:           #0A0A0A;
+  --color-hiw-text:   #F8F8F8;
+  --color-hiw-muted:  #999999;
+  --border-hiw:       #222222;
+  --card-hiw-bg:      #111111;
+  --sep-grad-hiw:     linear-gradient(to right, transparent, #333333 30%, #333333 70%, transparent);
+  --image-overlay-hiw:rgba(0,0,0,0.45);
 }
 
+/* ─── Root ─── */
 .hiw-root {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-hiw);
+  color: var(--color-hiw-text);
 }
 
 .display-font {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
-/* Grain Overlay */
-.grain-overlay {
-  position: fixed;
+/* ─── Eyebrow ─── */
+.hiw-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-hiw-muted);
+  margin-bottom: 12px;
+  display: block;
+}
+
+/* ─── Hero ─── */
+.hiw-hero {
+  position: relative;
+  padding: 112px 24px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hiw-hero-bg {
+  position: absolute;
   inset: 0;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.032;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-size: 128px 128px;
+  background-image: url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1800&q=60&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.06;
+  filter: grayscale(100%);
 }
 
-/* Step Card Styles */
+.hiw-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, var(--bg-hiw) 0%, transparent 20%, transparent 80%, var(--bg-hiw) 100%);
+}
+
+.hiw-hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.hiw-hero-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--color-hiw-text);
+  margin-bottom: 20px;
+}
+
+.hiw-hero-accent {
+  color: var(--color-hiw-text);
+  font-style: italic;
+  border-bottom: 2px solid var(--color-hiw-text);
+  padding-bottom: 2px;
+}
+
+.hiw-hero-subtitle {
+  color: var(--color-hiw-muted);
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+/* ─── Steps section ─── */
+.hiw-steps-section {
+  padding: 80px 24px;
+  position: relative;
+}
+
+@media (min-width: 1024px) {
+  .hiw-steps-section {
+    padding: 80px 80px;
+  }
+}
+
+.hiw-steps-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ─── Step card ─── */
 .step-card-container {
-  background: var(--surface-bg);
-  transition: border-color 0.4s, box-shadow 0.4s;
+  background: var(--card-hiw-bg);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
+.step-inner-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+  .step-inner-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .step-inner-grid--reversed .step-image-wrapper {
+    order: 2;
+  }
+
+  .step-inner-grid--reversed .step-content-side {
+    order: 1;
+  }
+}
+
+/* ─── Image side ─── */
 .step-image-wrapper {
+  position: relative;
   min-height: 260px;
+  overflow: hidden;
 }
 
 .step-bg-image {
+  position: absolute;
+  inset: 0;
   background-size: cover;
   background-position: center;
-  transition: transform 0.6s ease;
+  transition: transform 0.55s ease;
+  filter: grayscale(15%);
+}
+
+.step-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--image-overlay-hiw);
 }
 
 .step-number-watermark {
-  font-size: clamp(80px, 14vw, 140px);
-  color: rgba(34, 197, 94, 0.07);
-  bottom: -12px;
+  position: absolute;
+  bottom: -8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(72px, 13vw, 130px);
+  font-weight: 800;
+  color: rgba(0,0,0,0.06);
   line-height: 1;
-  font-family: 'Playfair Display', serif;
+  user-select: none;
+  pointer-events: none;
 }
 
-.glow-orb {
-  width: 280px;
-  height: 280px;
-  border-radius: 50%;
-  background: radial-gradient(circle, var(--green-5) 0%, transparent 70%);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  filter: blur(40px);
-  transition: opacity 0.4s;
+.dark .step-number-watermark {
+  color: rgba(255,255,255,0.06);
+}
+
+/* ─── Content side ─── */
+.step-content-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 32px;
+  position: relative;
+  background: var(--card-hiw-bg);
+}
+
+@media (min-width: 1024px) {
+  .step-content-side {
+    padding: 48px;
+  }
+}
+
+.step-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.step-number-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--color-hiw-text);
+}
+
+.step-divider {
+  width: 1px;
+  height: 14px;
+  background: var(--border-hiw);
+}
+
+.step-tag {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-hiw-muted);
+}
+
+.step-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 14px;
+  transition: color 0.25s;
+}
+
+.step-desc {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  font-weight: 300;
+  color: var(--color-hiw-muted);
 }
 
 .step-line-indicator {
-  background: linear-gradient(to right, var(--green-primary), transparent);
-  transition: width 0.5s ease;
-  box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+  margin-top: 28px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--color-hiw-text);
+  transition: width 0.4s ease;
 }
 
-/* Section Decor */
-.hero-vignette {
-  background: linear-gradient(to bottom, var(--surface-bg) 0%, transparent 40%, transparent 60%, var(--surface-bg) 100%);
+/* ─── Closing section ─── */
+.hiw-closing {
+  padding: 96px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
-.grid-overlay {
-  background-image: repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(34, 197, 94, 0.013) 80px, rgba(34, 197, 94, 0.013) 81px), 
-                    repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(34, 197, 94, 0.013) 80px, rgba(34, 197, 94, 0.013) 81px);
+.hiw-closing-content {
+  position: relative;
+  z-index: 10;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.hiw-closing-title {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--color-hiw-text);
+  margin-bottom: 20px;
+}
+
+.hiw-closing-accent {
+  font-style: italic;
+  border-bottom: 2px solid var(--color-hiw-text);
+  padding-bottom: 2px;
+}
+
+.hiw-closing-subtitle {
+  color: var(--color-hiw-muted);
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.75;
 }

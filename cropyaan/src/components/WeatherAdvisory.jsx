@@ -154,9 +154,9 @@ export default function WeatherAdvisory() {
           <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse at 50% 60%, rgba(34,197,94,0.06) 0%, transparent 65%)" }} />
           <div style={{ position: "relative", zIndex: 1, maxWidth: 700, margin: "0 auto" }}>
             <FadeIn>
-              <p style={{ color: "#22c55e", fontSize: "0.7rem", letterSpacing: "0.22em", textTransform: "uppercase", fontWeight: 500, marginBottom: 16 }}>
+              {/* <p style={{ color: "#22c55e", fontSize: "0.7rem", letterSpacing: "0.22em", textTransform: "uppercase", fontWeight: 500, marginBottom: 16 }}>
                 {t("weather.hero_tag")}
-              </p>
+              </p> */}
             </FadeIn>
             <FadeIn delay={0.1}>
               <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(2.2rem, 5vw, 3.8rem)", fontWeight: 700, lineHeight: 1.15, marginBottom: 20, color: "var(--color-text)" }}>

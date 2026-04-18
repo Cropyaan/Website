@@ -6,12 +6,32 @@
 /* ─── Hero overlay ───
    Light mode: white wash to lift the dark photo.
    Dark mode: dark vignette to darken the photo. */
-.hero-overlay {
+/* .hero-overlay {
   background: linear-gradient(
     to bottom,
     rgba(255, 255, 255, 0.28) 0%,
     rgba(255, 255, 255, 0.42) 40%,
     var(--bg-main) 100%
+  );
+} */
+ /* ─── Hero overlay ───
+   Soft fade to reduce image prominence and improve readability */
+
+.hero-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0.70) 45%,
+    rgba(255, 255, 255, 0.85) 100%
+  );
+}
+
+.dark .hero-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.70) 45%,
+    rgba(0, 0, 0, 0.85) 100%
   );
 }
 
@@ -24,7 +44,9 @@
   );
 }
 
+
 /* ─── Section vignette ─── */
+
 .section-vignette {
   background: linear-gradient(
     to bottom,
@@ -47,6 +69,7 @@
 }
 
 /* ─── Separator ─── */
+/*
 .separator {
   height: 1px;
   width: 100%;

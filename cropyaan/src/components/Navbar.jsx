@@ -29,22 +29,31 @@ export default function Navbar({ theme, setTheme }) {
 
   const navLinks = [
     { to: "/", label: t("nav.home") },
-    { to: "/about", label: t("nav.about") },
     { to: "/services", label: t("nav.services") },
     { to: "/how-it-works", label: t("nav.how") },
     { to: "/weather-advisory", label: t("nav.weather") },
     { to: "/crop-recommendation", label: t("nav.crop") },
+    { to: "/about", label: t("nav.about") },
     { to: "/contact", label: t("nav.contact") },
   ];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowNav(window.scrollY <= lastScrollY.current);
-      lastScrollY.current = window.scrollY;
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+useEffect(() => {
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
+
+    // Show ONLY when near top
+    if (currentScrollY < 20) {
+      setShowNav(true);
+    } else {
+      setShowNav(false);
+    }
+
+    lastScrollY.current = currentScrollY;
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
 
   useEffect(() => {
     setIsOpen(false);
