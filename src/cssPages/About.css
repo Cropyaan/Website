@@ -1,0 +1,111 @@
+/* ============================================================
+   About.css — Professional Black & White (No variable changes)
+   ============================================================ */
+
+/* Glow Card */
+.glow-card {
+  background: var(--overlay-25);
+  border: 1px solid var(--overlay-10);
+  transition: all 0.2s ease;
+}
+
+.glow-card:hover {
+  border-color: var(--color-text);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Offer card */
+.offer-card {
+  background: var(--overlay-25);
+  border: 1px solid var(--overlay-10);
+  transition: all 0.2s ease;
+}
+
+.offer-card:hover {
+  border-color: var(--color-text);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Title stays neutral */
+.offer-card:hover .offer-card-title {
+  color: var(--color-text);
+}
+
+/* Remove flashy glow feel */
+.offer-card-bar {
+  width: 3px;
+  height: 24px;
+  border-radius: 9999px;
+  background: var(--color-text);
+  box-shadow: none;
+  transition: height 0.2s ease;
+}
+
+.offer-card:hover .offer-card-bar {
+  height: 28px;
+}
+
+/* Arrow — subtle motion only */
+.offer-card-arrow {
+  transition: transform 0.2s ease;
+}
+
+.offer-card:hover .offer-card-arrow {
+  transform: translateX(2px);
+}
+
+/* Conviction card */
+.conviction-card {
+  background: var(--overlay-2);
+  border: 1px solid var(--overlay-6);
+  transition: all 0.2s ease;
+}
+
+.conviction-card:hover {
+  background: var(--overlay-25);
+  border-color: var(--color-text);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+}
+
+.conviction-card:hover .conviction-card-title {
+  color: var(--color-text);
+}
+
+/* Divider line */
+/*
+.conviction-bar {
+  width: 48px;
+  height: 1px;
+  border-radius: 9999px;
+  background: var(--color-text);
+  box-shadow: none;
+  transition: width 0.2s ease;
+  margin: 0 auto;
+}
+
+.conviction-card:hover .conviction-bar {
+  width: 60px;
+}
+
+/* Bullet Row */
+.bullet-row { 
+  transition: all 0.2s ease; 
+}
+
+.bullet-dot { 
+  transition: all 0.2s ease;
+  background: var(--color-text);
+}
+
+.bullet-text { 
+  transition: color 0.2s ease; 
+}
+
+/* Subtle hover */
+.bullet-row:hover .bullet-dot {
+  transform: scale(1.1);
+}
+
+.bullet-row:hover .bullet-text {
+  color: var(--color-text);
+}
