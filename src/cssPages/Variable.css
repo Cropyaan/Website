@@ -1,0 +1,18 @@
+/* This is the "Source of Truth" for your whole site */
+:root {
+  /* Default Light Mode Colors */
+  --navbar-bg: rgba(255, 255, 255, 0.8); 
+  --navbar-text: #1a1a1a;
+  --navbar-border: rgba(0, 0, 0, 0.1);
+  --brand-green: #22c55e;
+}
+
+/* This triggers when you toggle Dark Mode */
+[data-theme='dark'], .dark {
+  /* THE SOFTER BLACK (Charcoal) YOU REQUESTED */
+  --navbar-bg: rgba(22, 22, 22, 0.75); 
+  
+  --navbar-text: #f1f5f9;
+  --navbar-border: rgba(255, 255, 255, 0.1);
+  --brand-green: #4ade80;
+}

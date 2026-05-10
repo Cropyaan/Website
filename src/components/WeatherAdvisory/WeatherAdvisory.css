@@ -1,0 +1,729 @@
+/* ─────────────────────────────────────────────────────────────
+   WeatherAdvisory.css — Pure Black, Soft Corners
+───────────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+/* ── Keyframes ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes fillBar {
+  from { width: 0%; }
+}
+@keyframes shimmer {
+  0%   { opacity: 0.4; }
+  50%  { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Page ── */
+.wa-page {
+  background:  #ffffff;
+  min-height:  100vh;
+  font-family: 'DM Sans', sans-serif;
+  color:       #111;
+  padding-top: 100px;
+}
+
+/* ── Grain overlay ── */
+.wa-grain {
+  position:         fixed;
+  inset:            0;
+  pointer-events:   none;
+  z-index:          9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity:          0.025;
+}
+
+/* ── FadeIn ── */
+.wa-fadein { transition: opacity 0.9s ease, transform 0.9s ease; }
+.wa-fadein--hidden  { opacity: 0; transform: translateY(28px); }
+.wa-fadein--visible { opacity: 1; transform: translateY(0); }
+
+/* ── Remove all separators ── */
+.wa-separator { display: none; }
+
+/* ─────────────────────────────────────────────────────────────
+   HERO
+───────────────────────────────────────────────────────────── */
+.wa-hero {
+  padding:    80px 24px 52px;
+  text-align: center;
+  position:   relative;
+  overflow:   hidden;
+}
+.wa-hero__glow  { display: none; }
+.wa-hero__inner { max-width: 740px; margin: 0 auto; }
+
+.wa-hero__title {
+  font-family:    'Playfair Display', serif;
+  font-size:      clamp(2.8rem, 6.5vw, 4.8rem);
+  font-weight:    700;
+  line-height:    1.08;
+  letter-spacing: -0.01em;
+  color:          #111;
+  margin-bottom:  20px;
+}
+.wa-hero__title-accent {
+  font-style:  italic;
+  font-weight: 500;
+  color:       #111;
+}
+
+.wa-hero__subtitle {
+  font-family:    'DM Sans', sans-serif;
+  color:          #777;
+  font-size:      0.95rem;
+  font-weight:    300;
+  line-height:    1.9;
+  letter-spacing: 0.01em;
+  max-width:      520px;
+  margin:         0 auto;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SEARCH
+───────────────────────────────────────────────────────────── */
+.wa-search-section {
+  padding:    44px 24px 36px;
+  max-width:  700px;
+  margin:     0 auto;
+  text-align: center;
+  position:   relative;   /* ← add */
+  z-index:    10;          /* ← add */
+}
+
+.wa-search-wrapper {
+  position: relative;
+  width:    100%;
+  z-index:  10;            /* ← add */
+}
+
+/* pill-shaped search bar */
+.wa-search-form {
+  display:       flex;
+  align-items:   center;
+  border:        1.5px solid #d5d5d5;
+  border-radius: 999px;
+  overflow:      hidden;
+  background:    #fff;
+  transition:    border-color 0.22s ease, box-shadow 0.22s ease;
+  padding:       0 6px 0 20px;
+}
+.wa-search-form:focus-within {
+  border-color: #111;
+  box-shadow:   0 2px 24px rgba(0,0,0,0.09);
+}
+
+.wa-search-icon-left {
+  display:        flex;
+  align-items:    center;
+  color:          #bbb;
+  flex-shrink:    0;
+  margin-right:   10px;
+  pointer-events: none;
+  transition:     color 0.2s;
+}
+.wa-search-form:focus-within .wa-search-icon-left {
+  color: #666;
+}
+
+.wa-input {
+  flex:           1;
+  min-width:      0;
+  padding:        15px 0;
+  font-size:      0.93rem;
+  font-family:    'DM Sans', sans-serif;
+  font-weight:    400;
+  border:         none;
+  background:     transparent;
+  color:          #111;
+  outline:        none;
+  letter-spacing: 0.01em;
+}
+.wa-input::placeholder {
+  color:      #bbb;
+  font-style: normal;
+}
+
+.wa-btn {
+  display:        flex;
+  align-items:    center;
+  gap:            7px;
+  padding:        10px 22px;
+  border-radius:  999px;
+  background:     #111;
+  border:         none;
+  color:          #fff;
+  font-weight:    500;
+  font-size:      0.82rem;
+  font-family:    'DM Sans', sans-serif;
+  letter-spacing: 0.04em;
+  cursor:         pointer;
+  white-space:    nowrap;
+  flex-shrink:    0;
+  margin:         5px 0;
+  transition:     background 0.18s ease;
+}
+.wa-btn:hover:not(:disabled) { background: #333; }
+.wa-btn:disabled { opacity: 0.42; cursor: not-allowed; }
+
+/* ── Dropdown ── */
+.wa-dropdown {
+  position:      absolute;
+  top:           calc(100% + 8px);
+  left:          0;
+  right:         0;
+  background:    #fff;
+  border:        1.5px solid #e8e8e8;
+  border-radius: 16px;
+  overflow:      hidden;
+  z-index:       200;
+  list-style:    none;
+  margin:        0;
+  padding:       6px 0;
+  box-shadow:    0 8px 32px rgba(0,0,0,0.08);
+  animation:     dropIn 0.18s ease both;
+}
+
+.wa-dropdown-item {
+  display:     flex;
+  align-items: center;
+  gap:         10px;
+  padding:     11px 20px;
+  cursor:      pointer;
+  transition:  background 0.12s ease;
+  text-align:  left;
+}
+.wa-dropdown-item:hover,
+.wa-dropdown-item--active {
+  background: #f5f5f5;
+}
+
+.wa-dropdown-pin {
+  color:       #bbb;
+  flex-shrink: 0;
+  display:     flex;
+  align-items: center;
+  transition:  color 0.12s;
+}
+.wa-dropdown-item--active .wa-dropdown-pin,
+.wa-dropdown-item:hover   .wa-dropdown-pin {
+  color: #666;
+}
+
+.wa-dropdown-city {
+  color:       #222;
+  font-size:   0.875rem;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+}
+
+/* ── Error ── */
+.wa-error-box {
+  margin-top:    20px;
+  display:       flex;
+  align-items:   flex-start;
+  gap:           12px;
+  padding:       14px 18px;
+  border-radius: 12px;
+  background:    #fafafa;
+  border:        1.5px solid #e8e8e8;
+  text-align:    left;
+}
+.wa-error-icon { color: #111; flex-shrink: 0; margin-top: 1px; }
+.wa-error-text {
+  color:       #444;
+  font-size:   0.85rem;
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.6;
+}
+
+/* ── Loading ── */
+.wa-loading {
+  margin-top:     44px;
+  display:        flex;
+  flex-direction: column;
+  align-items:    center;
+  gap:            16px;
+}
+.wa-spinner {
+  width:            26px;
+  height:           26px;
+  border-radius:    50%;
+  border:           2px solid #e8e8e8;
+  border-top-color: #111;
+  animation:        spin 0.75s linear infinite;
+}
+.wa-loading-text {
+  color:          #aaa;
+  font-size:      0.78rem;
+  font-family:    'DM Sans', sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  animation:      shimmer 1.8s ease infinite;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SHARED SECTION LAYOUT
+───────────────────────────────────────────────────────────── */
+.wa-stats-section,
+.wa-advisory-section {
+  padding:   64px 24px;
+  max-width: 880px;
+  margin:    0 auto;
+}
+.wa-advisory-section { padding-bottom: 100px; }
+
+.wa-section-header { margin-bottom: 40px; }
+
+.wa-section-tag {
+  color:          #aaa;
+  font-size:      0.63rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight:    500;
+  font-family:    'DM Sans', sans-serif;
+  margin-bottom:  10px;
+}
+
+.wa-section-title {
+  font-family:    'Playfair Display', serif;
+  font-size:      clamp(1.9rem, 3.5vw, 2.8rem);
+  font-weight:    700;
+  color:          #111;
+  margin-bottom:  10px;
+  line-height:    1.15;
+  letter-spacing: -0.01em;
+}
+
+.wa-advisory-subtitle {
+  font-family: 'DM Sans', sans-serif;
+  color:       #777;
+  font-size:   0.9rem;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   STATS GRID
+───────────────────────────────────────────────────────────── */
+.wa-stats-grid {
+  display:               grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap:                   12px;
+}
+
+.wa-stat-card {
+  background:     #fff;
+  border:         1.5px solid #eee;
+  border-radius:  16px;
+  padding:        24px 22px;
+  display:        flex;
+  flex-direction: column;
+  gap:            12px;
+  transition:     border-color 0.2s, box-shadow 0.2s;
+}
+.wa-stat-card:hover {
+  border-color: #ccc;
+  box-shadow:   0 4px 16px rgba(0,0,0,0.05);
+}
+
+.wa-stat-icon-wrap {
+  width:           36px;
+  height:          36px;
+  border-radius:   10px;
+  background:      #f5f5f5;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  color:           #111;
+}
+.wa-stat-label {
+  font-family:    'DM Sans', sans-serif;
+  color:          #aaa;
+  font-size:      0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight:    500;
+  margin-bottom:  2px;
+}
+.wa-stat-value {
+  color:       #111;
+  font-size:   2rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  line-height: 1;
+}
+.wa-stat-unit {
+  font-size:   0.9rem;
+  color:       #999;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  margin-left: 3px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   ADVISORY ENGINE UI
+───────────────────────────────────────────────────────────── */
+
+/* ── Risk banner ── */
+.wa-risk-banner {
+  display:       flex;
+  align-items:   flex-start;
+  gap:           14px;
+  padding:       18px 22px;
+  border-radius: 14px;
+  margin-bottom: 36px;
+  background:    #f7f7f7;
+  border:        1.5px solid #ececec;
+}
+.wa-risk-banner-dot {
+  width:         7px;
+  height:        7px;
+  border-radius: 50%;
+  flex-shrink:   0;
+  margin-top:    8px;
+  background:    #111;
+}
+.wa-risk-banner-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size:   0.9rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color:       #333;
+}
+
+/* ── Subsection label ── */
+.wa-subsection-label {
+  font-family:    'DM Sans', sans-serif;
+  color:          #aaa;
+  font-size:      0.63rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight:    500;
+  margin-bottom:  14px;
+}
+
+/* ── Advisory list ── */
+.wa-advisory-list {
+  display:        flex;
+  flex-direction: column;
+  gap:            10px;
+}
+
+/* ── Risk card ── */
+.wa-risk-card {
+  border-radius:  14px;
+  padding:        20px 22px;
+  display:        flex;
+  flex-direction: column;
+  gap:            14px;
+  background:     #fafafa;
+  border:         1.5px solid #ececec;
+  animation:      fadeUp 0.5s ease both;
+  transition:     border-color 0.2s, box-shadow 0.2s;
+}
+.wa-risk-card:hover {
+  border-color: #ccc;
+  box-shadow:   0 4px 16px rgba(0,0,0,0.05);
+}
+
+.wa-risk-header {
+  display:        flex;
+  flex-direction: column;
+  gap:            10px;
+}
+.wa-risk-title-row {
+  display:     flex;
+  align-items: center;
+  gap:         10px;
+}
+.wa-risk-icon {
+  font-size:   1.15rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.wa-risk-label {
+  font-family:    'DM Sans', sans-serif;
+  color:          #111;
+  font-weight:    600;
+  font-size:      0.93rem;
+  flex:           1;
+  letter-spacing: 0.01em;
+}
+.wa-risk-level-badge {
+  font-family:    'DM Sans', sans-serif;
+  font-size:      0.6rem;
+  font-weight:    600;
+  padding:        4px 11px;
+  border-radius:  999px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  flex-shrink:    0;
+  background:     #ececec;
+  color:          #555;
+}
+
+/* ── Severity bar ── */
+.wa-risk-severity-row {
+  display:     flex;
+  align-items: center;
+  gap:         12px;
+}
+.wa-severity-track {
+  flex:          1;
+  height:        4px;
+  border-radius: 999px;
+  background:    #ececec;
+  overflow:      hidden;
+}
+.wa-severity-fill {
+  height:        100%;
+  border-radius: 999px;
+  background:    #111;
+  animation:     fillBar 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.wa-risk-severity-num {
+  font-family:          'DM Sans', sans-serif;
+  font-size:            0.78rem;
+  font-weight:          600;
+  min-width:            32px;
+  text-align:           right;
+  color:                #555;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Risk reason ── */
+.wa-risk-reason {
+  font-family: 'DM Sans', sans-serif;
+  color:       #666;
+  font-size:   0.875rem;
+  line-height: 1.75;
+  font-weight: 300;
+  padding-top: 2px;
+}
+
+/* ── Actions list ── */
+.wa-actions-list {
+  display:        flex;
+  flex-direction: column;
+  gap:            8px;
+}
+
+/* ── Action item ── */
+.wa-action-item {
+  display:       flex;
+  align-items:   flex-start;
+  gap:           14px;
+  padding:       14px 18px;
+  border-radius: 12px;
+  background:    #fafafa;
+  border:        1.5px solid #ececec;
+  animation:     fadeUp 0.5s ease both;
+  transition:    border-color 0.2s, box-shadow 0.2s;
+}
+.wa-action-item:hover {
+  border-color: #ccc;
+  box-shadow:   0 2px 10px rgba(0,0,0,0.04);
+}
+
+.wa-action-urgency {
+  font-family:    'DM Sans', sans-serif;
+  font-size:      0.6rem;
+  font-weight:    600;
+  padding:        4px 11px;
+  border-radius:  999px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space:    nowrap;
+  flex-shrink:    0;
+  margin-top:     2px;
+  background:     #ececec;
+  color:          #555;
+}
+.wa-action-text {
+  font-family: 'DM Sans', sans-serif;
+  color:       #444;
+  font-size:   0.875rem;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+/* ── Footer ── */
+.wa-footer-note {
+  font-family:    'DM Sans', sans-serif;
+  margin-top:     60px;
+  font-size:      0.75rem;
+  color:          #bbb;
+  text-align:     center;
+  line-height:    1.9;
+  letter-spacing: 0.03em;
+}
+
+/* ── Unused ── */
+.wa-crop-select,
+.wa-crop-badge,
+.wa-quick-picks,
+.wa-chip { display: none; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ─────────────────────────────────────────────────────────────
+   DARK MODE OVERRIDES
+───────────────────────────────────────────────────────────── */
+
+.dark .wa-page {
+  background: #0f0f0f;
+  color:      #e8e8e8;
+}
+
+.dark .wa-hero__title,
+.dark .wa-hero__title-accent,
+.dark .wa-section-title,
+.dark .wa-risk-label {
+  color: #f0f0f0;
+}
+
+.dark .wa-hero__subtitle,
+.dark .wa-advisory-subtitle,
+.dark .wa-risk-reason,
+.dark .wa-action-text {
+  color: #888;
+}
+
+/* Search bar */
+.dark .wa-search-form {
+  background:   #1a1a1a;
+  border-color: #2e2e2e;
+}
+.dark .wa-search-form:focus-within {
+  border-color: #555;
+  box-shadow:   0 2px 24px rgba(0,0,0,0.4);
+}
+.dark .wa-input {
+  color: #e8e8e8;
+}
+.dark .wa-input::placeholder {
+  color: #444;
+}
+.dark .wa-btn {
+  background: #e8e8e8;
+  color:      #111;
+}
+.dark .wa-btn:hover:not(:disabled) {
+  background: #ccc;
+}
+
+/* Dropdown */
+.dark .wa-dropdown {
+  background:   #1a1a1a;
+  border-color: #2e2e2e;
+  box-shadow:   0 8px 32px rgba(0,0,0,0.4);
+}
+.dark .wa-dropdown-item:hover,
+.dark .wa-dropdown-item--active {
+  background: #252525;
+}
+.dark .wa-dropdown-city {
+  color: #ccc;
+}
+
+/* Stat cards */
+.dark .wa-stat-card {
+  background:   #161616;
+  border-color: #2a2a2a;
+}
+.dark .wa-stat-card:hover {
+  border-color: #3a3a3a;
+  box-shadow:   0 4px 16px rgba(0,0,0,0.3);
+}
+.dark .wa-stat-icon-wrap {
+  background: #222;
+  color:      #e8e8e8;
+}
+.dark .wa-stat-value {
+  color: #f0f0f0;
+}
+.dark .wa-stat-unit {
+  color: #666;
+}
+
+/* Risk & action cards */
+.dark .wa-risk-banner {
+  background:   #161616;
+  border-color: #2a2a2a;
+}
+.dark .wa-risk-banner-text {
+  color: #aaa;
+}
+.dark .wa-risk-card {
+  background:   #161616;
+  border-color: #2a2a2a;
+}
+.dark .wa-risk-card:hover {
+  border-color: #3a3a3a;
+  box-shadow:   0 4px 16px rgba(0,0,0,0.3);
+}
+.dark .wa-risk-level-badge {
+  background: #2a2a2a;
+  color:      #888;
+}
+.dark .wa-severity-track {
+  background: #2a2a2a;
+}
+.dark .wa-severity-fill {
+  background: #e8e8e8;
+}
+.dark .wa-risk-severity-num {
+  color: #888;
+}
+.dark .wa-action-item {
+  background:   #161616;
+  border-color: #2a2a2a;
+}
+.dark .wa-action-item:hover {
+  border-color: #3a3a3a;
+  box-shadow:   0 2px 10px rgba(0,0,0,0.3);
+}
+.dark .wa-action-urgency {
+  background: #2a2a2a;
+  color:      #888;
+}
+
+/* Error & loading */
+.dark .wa-error-box {
+  background:   #161616;
+  border-color: #2a2a2a;
+}
+.dark .wa-error-text {
+  color: #888;
+}
+.dark .wa-spinner {
+  border-color:     #2e2e2e;
+  border-top-color: #e8e8e8;
+}
+.dark .wa-footer-note {
+  color: #444;
+}
