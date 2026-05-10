@@ -173,7 +173,7 @@ export default function Services() {
           <div className="hero-content-box">
             <FadeIn>
               <p className="hero-tagline" style={{ color: "var(--color-text)" }}>
-                {t("services.hero_tag")}
+                {/* {t("services.hero_tag")} */}
               </p>
             </FadeIn>
 
@@ -238,7 +238,7 @@ export default function Services() {
             badge={t("services.coming_soon")}
             label={t("services.insights_label")}
             title={t("services.insights_title1")}
-            titleAccent={t("services.insights_title2")}
+            // titleAccent={t("services.insights_title2")}
             description={t("services.insights_desc")}
             bullets={[
               t("services.insights_b1"),
@@ -254,7 +254,7 @@ export default function Services() {
             badge={t("services.coming_soon")}
             label={t("services.chatbot_label")}
             title={t("services.chatbot_title1")}
-            titleAccent={t("services.chatbot_title2")}
+            // titleAccent={t("services.chatbot_title2")}
             description={t("services.chatbot_desc")}
             bullets={[
               t("services.chatbot_b1"),

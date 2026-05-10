@@ -159,7 +159,7 @@ export default function Home() {
                 Explore Solutions
               </button>
               <button className="secondary-btn px-8 py-4 rounded-xl font-semibold text-sm" onClick={() => navigate("/how-it-works")}>
-                Book Drone Services
+                Drone Services
               </button>
             </div>
           </div>
@@ -250,7 +250,7 @@ export default function Home() {
         <section className="py-24 px-6 lg:px-20 relative overflow-hidden">
   <div className="max-w-6xl mx-auto">
     <FadeIn delay={0.05}>
-      <p className="section-eyebrow text-center mb-3">What We Offer</p>
+      {/* <p className="section-eyebrow text-center mb-3">What We Offer</p> */}
     </FadeIn>
     <FadeIn delay={0.1}>
       <h2 className="display-font text-4xl md:text-5xl font-bold mb-4 text-center">

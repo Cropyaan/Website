@@ -151,30 +151,31 @@
     "closing": "Cropyaan is built with farmers, for farmers. We measure our progress by how useful we are to the people working the land."
   },
   "hiw": {
-    "hero_tag": "How CropYaan Helps Farmers",
-    "hero_title1": "From Knowledge to",
-    "hero_title2": "Better Farming",
-    "hero_subtitle": "CropYaan puts reliable agricultural knowledge in every farmer's hands — from crop guidance and weather updates to government schemes and market prices.",
-    "step1_title": "Explore Farming Knowledge",
-    "step1_tag": "Knowledge",
-    "step1_desc": "Farmers browse crop-specific guides, seasonal farming practices, and agricultural resources curated from universities, KVKs, and research institutions.",
-    "step2_title": "Check Weather Updates",
-    "step2_tag": "Weather",
-    "step2_desc": "Farmers view localised weather forecasts to plan sowing schedules, irrigation cycles, and harvesting windows with greater confidence.",
-    "step3_title": "Discover Government Schemes",
-    "step3_tag": "Schemes",
-    "step3_desc": "Farmers learn about central and state subsidies, crop insurance programs, and welfare initiatives — with step-by-step guidance on how to apply.",
-    "step4_title": "Track Market Prices",
-    "step4_tag": "Market",
-    "step4_desc": "Farmers monitor live and historical mandi prices across regions to decide the best time and location to sell their produce for maximum returns.",
-    "step5_title": "Make Better Farming Decisions",
-    "step5_tag": "Outcomes",
-    "step5_desc": "With reliable knowledge from CropYaan, farmers improve crop planning, reduce losses, and build more productive and sustainable farming practices.",
+    "hero_tag": "How Drones Helps Farmers",
+    "hero_title1": "Smarter Fields Through",
+    "hero_title2": "Drone Innovation",
+    "hero_subtitle": "Discover how drones are transforming farming with smarter, faster, and more precise insights",
+    "step1_title": "Precision Spraying Reduces Chemical Use",
+    "step1_tag": "Precision",
+    "step1_desc": "Farming drones can reduce pesticide and fertilizer usage by up to 30–50% by targeting only affected areas instead of spraying entire fields. This not only lowers input costs for farmers but also minimizes environmental impact, reducing soil degradation and chemical runoff into water sources.",
+    "step2_title": "Covers Large Areas Quickly",
+    "step2_tag": "Coverage",
+    "step2_desc": "A single agricultural drone can survey 20–40 acres in under 30 minutes, saving hours compared to manual inspection. This speed allows farmers to monitor fields more frequently, identify issues early, and respond quickly before problems spread across large areas.",
+    "step3_title": "Boosts Crop Yield with Data Insights",
+    "step3_tag": "Yield",
+    "step3_desc": "Drones equipped with multispectral cameras can detect crop stress early, helping farmers improve yield by up to 15–20%. By analyzing plant health, moisture levels, and disease patterns, farmers can take precise actions instead of relying on guesswork.",
+    "step4_title": "Useful for Difficult Terrain",
+    "step4_tag": "Terrain",
+    "step4_desc": "Drones can easily operate in hilly regions, flooded fields, or muddy soil, where traditional machinery struggles. This makes them especially valuable in regions with challenging geography, ensuring no part of the farm goes unmonitored or untreated.",
+    "step5_title": "Growing Fast in India",
+    "step5_tag": "Growth",
+    "step5_desc": "With government support like subsidies and initiatives, agricultural drone adoption in India is rapidly increasing. As costs decrease and awareness grows, more farmers are turning to drones for spraying, mapping, and improving overall farm productivity.",
     "closing_tag": "Knowledge to Action",
     "closing_title1": "Informed Farmers,",
     "closing_title2": "Better Harvests",
     "closing_subtitle": "Every resource on CropYaan is chosen to reduce uncertainty and give farmers the confidence to plan smarter — across every season, every crop, and every region."
   },
+
   "weather": {
     "hero_tag": "Weather Advisory",
     "hero_title1": "Plan Your Farm with",
@@ -194,6 +195,7 @@
     "advisory_title": "Recommendations for Your Fields",
     "advisory_based": "Based on current weather in",
     "footer_note": "Weather data sourced from Open-Meteo. Advisories are general guidance — consult your local KVK or agricultural officer for crop-specific recommendations.",
+
     "adv_rain_title": "Rain Expected",
     "adv_rain_text": "Rainfall likely. Consider delaying irrigation and avoid applying fertilizers that may wash away.",
     "adv_heat_title": "High Temperature Alert",
@@ -203,8 +205,87 @@
     "adv_cold_title": "Low Temperature",
     "adv_cold_text": "Cold conditions ahead. Protect frost-sensitive crops and delay sowing of warm-season varieties.",
     "adv_good_title": "Favourable Conditions",
-    "adv_good_text": "Weather looks good for farming activities today. Suitable for sowing, spraying, and field maintenance."
+    "adv_good_text": "Weather looks good for farming activities today. Suitable for sowing, spraying, and field maintenance.",
+
+    "detected_conditions": "Detected Conditions",
+    "recommended_actions": "Recommended Actions",
+
+    "level_critical": "Critical",
+    "level_high": "High",
+    "level_medium": "Medium",
+    "level_low": "Low",
+
+    "urgency_immediate": "Act Now",
+    "urgency_today": "Today",
+    "urgency_ongoing": "Ongoing",
+    "urgency_planning": "Plan Ahead",
+
+    "summary_critical": "Critical alert",
+    "summary_high": "High risk detected",
+    "summary_medium": "Moderate risk present",
+    "summary_low": "Minor risk noted",
+    "summary_template": "{{prefix}}: {{label}} risk is {{level}} ({{severity}}%). {{reason}}{{extra}}",
+    "summary_none": "Weather conditions are broadly favorable. No significant risks detected for field operations today.",
+
+    "risk_heat_stress_label": "Heat Stress",
+    "risk_heat_stress_reason": "Temperature is above 32°C. Crops face accelerating evapotranspiration and cellular heat damage. Soil surface can reach 50°C+, scorching shallow roots.",
+
+    "risk_cold_stress_label": "Cold / Frost Risk",
+    "risk_cold_stress_reason": "Temperature below 12°C slows root metabolism and nutrient uptake. Below 4°C, ice crystal formation damages plant cell walls. Phosphorus and nitrogen absorption drops sharply.",
+
+    "risk_excess_rain_label": "Excess Rainfall",
+    "risk_excess_rain_reason": "High rain probability indicates likely precipitation. Saturated soil reduces oxygen in the root zone, increasing waterlogging risk and causing runoff that strips applied fertilizers.",
+
+    "risk_drought_risk_label": "Drought / Dry Stress",
+    "risk_drought_risk_reason": "Low rain probability combined with high temperature creates rapid soil moisture depletion. Sandy or loamy soils may become hydrophobic within 48–72 hours without irrigation.",
+
+    "risk_wind_damage_label": "Wind Damage Risk",
+    "risk_wind_damage_reason": "High wind increases plant transpiration, causing water stress even when soil moisture is adequate. Above 40 km/h, stem lodging and damage to flowering structures can occur.",
+
+    "risk_fungal_pressure_label": "Fungal Disease Pressure",
+    "risk_fungal_pressure_reason": "Warm and wet conditions create ideal conditions for fungal pathogens. Leaf blight, powdery mildew, and root rot thrive when the canopy stays moist for 6+ hours.",
+
+    "risk_spray_risk_label": "Poor Spray Conditions",
+    "risk_spray_risk_reason": "High wind or rain probability makes pesticide and foliar feed applications ineffective. Spray drift can travel 20m off-target and rain will wash off product before absorption.",
+    
+    "risk_heat_stress_reason_short":     "High temperature accelerating crop stress.",
+    "risk_cold_stress_reason_short":     "Low temperature slowing nutrient uptake.",
+    "risk_excess_rain_reason_short":     "High rain probability causing waterlogging risk.",
+    "risk_drought_risk_reason_short":    "Low rain and high heat depleting soil moisture.",
+    "risk_wind_damage_reason_short":     "High winds increasing plant water stress.",
+    "risk_fungal_pressure_reason_short": "Warm wet conditions favoring fungal growth.",
+    "risk_spray_risk_reason_short":      "Wind or rain making spray applications ineffective.",
+    "summary_extra": "and {{count}} more condition(s) detected.",
+
+    "action_heat_1": "Irrigate fields in the early morning (before 8 AM) to minimize evaporation loss",
+    "action_heat_2": "Avoid all field operations between 11 AM – 4 PM",
+    "action_heat_3": "Apply mulch to retain soil moisture and reduce surface temperature",
+    "action_heat_4": "Monitor for wilting symptoms — especially in young seedlings",
+
+    "action_cold_1": "Apply mulching around root zones to insulate against ground frost",
+    "action_cold_2": "Delay fertilizer application — nutrients will not be absorbed in cold soil",
+    "action_cold_3": "Avoid sowing new seeds until temperatures recover above 14°C",
+
+    "action_rain_1": "Clear drainage channels before rainfall arrives to prevent waterlogging",
+    "action_rain_2": "Hold off on fertilizer application — high washoff risk",
+    "action_rain_3": "Avoid heavy machinery on fields to prevent soil compaction under wet conditions",
+
+    "action_drought_1": "Begin supplemental irrigation — check soil moisture at 10 cm depth",
+    "action_drought_2": "Prioritize irrigation for crops at flowering or grain-fill stage",
+    "action_drought_3": "Consider drip irrigation to maximise efficiency under dry conditions",
+
+    "action_wind_1": "Stake tall or flowering plants to prevent lodging",
+    "action_wind_2": "Postpone all aerial and spray operations until wind drops below 20 km/h",
+    "action_wind_3": "Inspect for snapped stems or uprooted seedlings after wind event",
+
+    "action_fungal_1": "Scout fields for early fungal symptoms — act before visible spread",
+    "action_fungal_2": "Apply preventive fungicide if rain is expected to persist beyond 2 days",
+    "action_fungal_3": "Improve canopy airflow where possible — avoid dense over-irrigation",
+
+    "action_spray_1": "Postpone pesticide and foliar fertilizer applications to a calm, dry window",
+    "action_spray_2": "If spraying is unavoidable, use low-drift nozzles and apply early morning"
   },
+
   "login": {
     "back": "← Back to Cropyaan",
     "brand": "🌾 Cropyaan",
@@ -271,7 +352,7 @@
     "crop_b3": "Fertiliser and water recommendations by crop type",
     "crop_b4": "Market timing suggestions to reduce post-harvest losses",
     "insights_label": "Agricultural Insights",
-    "insights_title1": "Smarter Decisions",
+    "insights_title1": "Make Smarter Decisions",
     "insights_title2": "Backed by National Data",
     "insights_desc": "We are building a layer of insights that connects government crop data, market trends, and regional performance — so you have more than gut instinct to go on.",
     "insights_b1": "Crop price trends from mandis across the country",
@@ -279,7 +360,7 @@
     "insights_b3": "Regional yield benchmarks to compare your performance",
     "insights_b4": "Soil health data overlaid with seasonal recommendations",
     "chatbot_label": "AI Assistant",
-    "chatbot_title1": "Ask Anything,",
+    "chatbot_title1": "Ask Anything",
     "chatbot_title2": "Get a Real Answer",
     "chatbot_desc": "Our AI assistant is built specifically for farming queries — plain language in, practical advice out.",
     "chatbot_b1": "Ask about pests, soil, weather, or schemes in any language",
@@ -304,9 +385,16 @@
     "mustard": "Mustard"
   },
   "season": {
-    "kharif": "Kharif",
-    "rabi": "Rabi"
-  },
+  "kharif":        "Kharif",
+  "rabi":          "Rabi",
+  "zaid":          "Zaid",
+  "kharif_label":  "Kharif (Monsoon)",
+  "kharif_months": "June – October",
+  "rabi_label":    "Rabi (Winter)",
+  "rabi_months":   "November – March",
+  "zaid_label":    "Zaid (Summer)",
+  "zaid_months":   "April – May"
+},
 
       "crop_advisor": {
       "tag": "Smart Crop Planning",
@@ -378,5 +466,135 @@
       "confidence_good": "Good Match",
       "confidence_fair": "Fair Match",
       "confidence_marginal": "Marginal"
+    },
+    
+  "crop": {
+    "rice": {
+      "name": "Rice",
+      "description": "Staple food crop requiring high water availability and warm humid climate.",
+      "tips": "Requires standing water during early growth. Transplanting gives better yield than direct sowing."
+    },
+    "wheat": {
+      "name": "Wheat",
+      "description": "Cool-season crop suited to well-drained, fertile plains.",
+      "tips": "Sow after monsoon. Needs 4–5 irrigations. Harvest before summer heat."
+    },
+    "maize": {
+      "name": "Maize",
+      "description": "Versatile warm-season crop for food, fodder, and industrial use.",
+      "tips": "Well-drained soils are critical. Avoid waterlogging. Intercrop with legumes for soil health."
+    },
+    "cotton": {
+      "name": "Cotton",
+      "description": "Major fiber crop thriving in deep black soils with warm dry climate.",
+      "tips": "Deep black soil retains moisture well. Avoid excessive rain during boll formation."
+    },
+    "soybean": {
+      "name": "Soybean",
+      "description": "Protein-rich legume that fixes nitrogen, improving soil for next crops.",
+      "tips": "Short-duration variety recommended for late sowings. Inoculate seeds with Rhizobium."
+    },
+    "groundnut": {
+      "name": "Groundnut",
+      "description": "Drought-tolerant oilseed crop well-adapted to light sandy soils.",
+      "tips": "Sandy loam soil ensures easy pod penetration and harvest. Calcium is critical for pod fill."
+    },
+    "sugarcane": {
+      "name": "Sugarcane",
+      "description": "Long-duration cash crop needing fertile soil and ample water.",
+      "tips": "Ratoon cropping saves cost after primary harvest. Drip irrigation increases water efficiency."
+    },
+    "bajra": {
+      "name": "Pearl Millet (Bajra)",
+      "description": "Highly drought-resistant millet for arid and semi-arid zones.",
+      "tips": "Grows well in poor, sandy soils. Extremely heat and drought tolerant. Sow at monsoon onset."
+    },
+    "jowar": {
+      "name": "Sorghum (Jowar)",
+      "description": "Multi-purpose cereal for food, fodder, and ethanol production.",
+      "tips": "Rabi Jowar is more nutritious than Kharif. Avoid waterlogging. Tolerates moderate drought."
+    },
+    "mustard": {
+      "name": "Mustard",
+      "description": "Major rabi oilseed crop grown across the northern plains.",
+      "tips": "Cool climate at sowing stage and warm dry weather at maturity gives best oil content."
+    },
+    "potato": {
+      "name": "Potato",
+      "description": "High-value vegetable crop requiring cool climate and well-drained soil.",
+      "tips": "Loose, well-drained soil ensures tuber development. Hill up after 30 days to prevent greening."
+    },
+    "sunflower": {
+      "name": "Sunflower",
+      "description": "Day-length neutral oilseed crop suitable across all three seasons.",
+      "tips": "Highly photo-insensitive — can be grown year-round. Needs adequate boron for seed set."
+    },
+    "tomato": {
+      "name": "Tomato",
+      "description": "High-value vegetable crop for zaid and rabi seasons in warm regions.",
+      "tips": "Stake plants to prevent disease. Drip irrigation reduces foliar disease significantly."
+    },
+    "tea": {
+      "name": "Tea",
+      "description": "Perennial plantation crop for humid, hilly terrain with acidic laterite soils.",
+      "tips": "Acidic soil (pH 4.5–5.5) is essential. Shade trees help maintain humidity. Regular pruning for bushes."
+    },
+    "coconut": {
+      "name": "Coconut",
+      "description": "Tropical palm crop for coastal and humid inland areas.",
+      "tips": "Saline coastal soils suit coconut well. Intercrop with banana or cacao for added income."
     }
+  },
+
+
+  "crop_engine": {
+  "reason_season":            "Suited for {{season}} season",
+  "reason_soil":              "Grows well in {{soil}}",
+  "reason_temp_ok":           "Current temperature ({{temp}}°C) is optimal",
+  "reason_temp_low_partial":  "Temperature slightly below optimum",
+  "reason_temp_high_partial": "Temperature slightly above optimum",
+  "reason_rain_ok":           "Rainfall ({{rain}} mm) within optimal range",
+  "reason_rain_low_partial":  "Rainfall slightly below optimum",
+  "reason_rain_high_partial": "Rainfall above optimum",
+  "warn_wrong_season":        "Not a {{season}} crop",
+  "warn_soil":                "Soil type may not be ideal",
+  "warn_temp_low":            "Temp too low (needs ≥{{min}}°C)",
+  "warn_temp_high":           "Temp too high (needs ≤{{max}}°C)",
+  "warn_rain_low":            "Low rainfall — irrigation recommended",
+  "warn_rain_high":           "Excess rainfall — drainage management needed",
+  "advisory_extreme_heat":    "Extreme heat — use heat-tolerant varieties and ensure irrigation.",
+  "advisory_extreme_cold":    "Very cold temperatures — protect crops from frost damage.",
+  "advisory_low_monsoon":     "Very low monsoon rainfall — heavy irrigation dependency.",
+  "advisory_excess_rain":     "Excess rainfall detected — prioritize drainage and flood-tolerant crops.",
+  "error_search":             "Location search failed. Try again.",
+  "error_fetch":              "Failed to fetch data. Please check your connection.",
+  "error_map":                "Could not resolve this map location. Try a different spot."
+},
+"crop_data": {
+  "cat_cereal":     "Cereal",
+  "cat_legume":     "Legume",
+  "cat_oilseed":    "Oilseed",
+  "cat_cash_crop":  "Cash Crop",
+  "cat_millet":     "Millet",
+  "cat_vegetable":  "Vegetable",
+  "cat_plantation": "Plantation",
+  "water_very_low": "Very Low",
+  "water_low":      "Low",
+  "water_medium":   "Medium",
+  "water_high":     "High",
+  "water_very_high":"Very High",
+  "yield_medium":   "Medium",
+  "yield_high":     "High",
+  "yield_very_high":"Very High"
+},
+"soil": {
+  "alluvial": "Alluvial Soil",
+  "black":    "Black (Regur) Soil",
+  "red":      "Red Laterite Soil",
+  "laterite": "Laterite Soil",
+  "sandy":    "Sandy / Arid Soil",
+  "forest":   "Forest / Mountain Soil",
+  "saline":   "Saline / Alkaline Soil"
 }
+}
+

@@ -10,7 +10,7 @@ const IMAGES = {
 const s = {
   root: {
     minHeight: "100vh",
-    background: "color-mix(in srgb, var(--bg-main, #0a0a0a) 94%, #f5e6c8 6%)",
+    background: "color-mix(in srgb, var(--bg-main, #0a0a0a) 94%)",
     color: "var(--color-text, #ede8df)",
     fontFamily: "'Georgia', 'Times New Roman', serif",
   },
@@ -179,7 +179,7 @@ export default function About() {
 
         {/* ── HERO ── */}
         <section style={s.hero}>
-          <span style={s.heroEyebrow}>{t("about.hero_eyebrow")}</span>
+          {/* <span style={s.heroEyebrow}>{t("about.hero_eyebrow")}</span> */}
           <h1 style={s.heroTitle}>
   {t("about.hero_title", { brand: "CROPYAAN" })}
 </h1>
@@ -191,7 +191,7 @@ export default function About() {
         {/* ── WHO WE ARE — text left · image right ── */}
         <div className="ca-row">
           <div className="ca-text-cell">
-            <span style={s.sectionLabel}>{t("about.who_label")}</span>
+            {/* <span style={s.sectionLabel}>{t("about.who_label")}</span> */}
             <h2 style={s.sectionTitle}>{t("about.who_title")}</h2>
             <p style={s.sectionContent}>{t("about.who_content")}</p>
           </div>
@@ -205,7 +205,7 @@ export default function About() {
         {/* ── MISSION — image left · text right ── */}
         <div className="ca-row rev">
           <div className="ca-text-cell">
-            <span style={s.sectionLabel}>{t("about.mission_label")}</span>
+            {/* <span style={s.sectionLabel}>{t("about.mission_label")}</span> */}
             <h2 style={s.sectionTitle}>{t("about.mission_title")}</h2>
             <p style={s.sectionContent}>{t("about.mission_content")}</p>
           </div>
@@ -219,7 +219,7 @@ export default function About() {
         {/* ── VISION — text left · image right ── */}
         <div className="ca-row">
           <div className="ca-text-cell">
-            <span style={s.sectionLabel}>{t("about.vision_label")}</span>
+            {/* <span style={s.sectionLabel}>{t("about.vision_label")}</span> */}
             <h2 style={s.sectionTitle}>{t("about.vision_title")}</h2>
             <p style={s.sectionContent}>{t("about.vision_content")}</p>
           </div>

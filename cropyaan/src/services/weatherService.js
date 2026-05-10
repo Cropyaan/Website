@@ -35,7 +35,7 @@ export async function fetchWeatherData(lat, lng) {
     timezone: "Asia/Kolkata",
   });
 
-  const url = `${OPEN_METEO_BASE}?${params}`;
+  const url = `http://localhost:8080/api/weather?lat=${lat}&lon=${lng}`;
   const response = await fetch(url);
 
   if (!response.ok) {
@@ -43,6 +43,7 @@ export async function fetchWeatherData(lat, lng) {
   }
 
   const data = await response.json();
+  console.log("BACKEND RESPONSE:", data);
   return parseWeatherResponse(data);
 }
 
@@ -61,13 +62,13 @@ function parseWeatherResponse(data) {
   const monthlyRainfallEstimate = (totalRainfall / 7) * 30; // extrapolate to monthly
 
   return {
-    current: {
-      temperature: roundOne(current.temperature_2m),
-      humidity: current.relative_humidity_2m,
-      precipitation: roundOne(current.precipitation ?? 0),
-      windSpeed: roundOne(current.wind_speed_10m),
-      weatherCode: current.weather_code,
-    },
+  current: {
+    temperature: roundOne(current.temperature_2m ?? current.temperature),
+    humidity: current.relative_humidity_2m ?? current.humidity,
+    precipitation: roundOne(current.precipitation ?? current.rainfall ?? 0),
+    precipitation_probability: current.precipitation_probability ?? null, // ← ADD THIS
+    windSpeed: roundOne(current.wind_speed_10m ?? current.windSpeed),
+weatherCode: current.weather_code ?? current.weatherCode ?? 0,  },
     weekly: {
       avgTempMax: roundOne(avgTempMax),
       avgTempMin: roundOne(avgTempMin),
