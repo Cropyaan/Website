@@ -1,0 +1,56 @@
+### Health check
+GET http://localhost:8080/api/test
+
+### Sign up (register)
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "password123"
+}
+
+### Sign in (login)
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "john@example.com",
+  "password": "password123"
+}
+
+### Sign in with wrong password (should fail)
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "john@example.com",
+  "password": "wrongpassword"
+}
+
+### Sign up with duplicate email (should fail)
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Jane Doe",
+  "email": "john@example.com",
+  "password": "password456"
+}
+
+### Sign in and use token (copy token from sign-in response to below)
+GET http://localhost:8080/api/test
+Authorization: Bearer <token>
+
+### Sign out is client-side only (removes token from localStorage)
+### No backend endpoint needed — just discard the token on the frontend.
+### To verify sign-out behavior, try using the old token after logout:
+
+GET http://localhost:8080/api/test
+Authorization: Bearer <old-token>
+### → still returns 200 because the backend is stateless.
+### For full invalidation, add a token blacklist on the backend.
+
+### H2 Console (only if using H2, not PostgreSQL)
+GET http://localhost:8080/h2-console
