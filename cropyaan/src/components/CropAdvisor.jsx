@@ -3,7 +3,8 @@ import { useTranslation } from "react-i18next";
 import {
   MapPin, Search, Thermometer, Droplets, Wind, CloudRain,
   Sprout, Leaf, AlertTriangle, ChevronRight, ChevronDown,
-  RotateCcw, Info, TrendingUp, X, Tractor, Users, Beef, Waves
+  RotateCcw, Info, TrendingUp, X, Tractor, Users, Beef, Waves,
+  IndianRupee
 } from "lucide-react";
 import { useCropAdvisor, ADVISOR_STATUS } from "../hooks/useCropAdvisor.js";
 import { weatherCodeToEmoji, weatherCodeToLabel } from "../services/weatherService.js";
@@ -282,6 +283,85 @@ function FarmInputs({ onSubmit, t }) {
       >
         {ready ? t("crop_advisor.submit_ready") : t("crop_advisor.submit_pending")}
       </button>
+    </div>
+  );
+}
+
+// ── MarketInsights ────────────────────────────────────────────────────────────
+
+function MarketInsights({ marketData, mostProfitable, recommendations, t }) {
+  if (!marketData) return null;
+
+  const hasData = Object.values(marketData).some(Boolean);
+  if (!hasData) return null;
+
+  return (
+    <div className="card rounded-2xl p-5">
+      <SectionTag>{t("market.tag")}</SectionTag>
+
+      {mostProfitable?.marketPrice && (
+        <div className="mi-most-profitable">
+          <div className="mi-badge-row">
+            <IndianRupee size={13} color="#16a34a" />
+            <span className="mi-badge-label">{t("market.most_profitable")}</span>
+          </div>
+          <div className="mi-most-profitable__crop">
+            <span className="mi-most-profitable__emoji">{mostProfitable.crop.emoji}</span>
+            <span className="mi-most-profitable__name">
+              {t(`crop.${mostProfitable.crop.id}.name`)}
+            </span>
+            <span className="mi-most-profitable__price">
+              ₹{mostProfitable.marketPrice.toLocaleString()}/qtl
+            </span>
+          </div>
+        </div>
+      )}
+
+      <div className="mi-table-wrap">
+        <table className="mi-table">
+          <thead>
+            <tr>
+              <th>{t("market.crop")}</th>
+              <th>{t("market.modal_price")}</th>
+              <th>{t("market.range")}</th>
+              <th>{t("market.markets")}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {recommendations.map((r) => {
+              const m = marketData[r.crop.id];
+              if (!m) return null;
+              return (
+                <tr key={r.crop.id}>
+                  <td className="mi-td-crop">
+                    <span>{r.crop.emoji}</span>
+                    <span>{t(`crop.${r.crop.id}.name`)}</span>
+                  </td>
+                  <td className="mi-td-price">
+                    <span className="mi-price-value">₹{m.avgModalPrice.toLocaleString()}</span>
+                    <span className="mi-price-unit">/qtl</span>
+                  </td>
+                  <td className="mi-td-range">
+                    <span className="mi-range-low">₹{m.minModalPrice.toLocaleString()}</span>
+                    <span className="mi-range-sep"> – </span>
+                    <span className="mi-range-high">₹{m.maxModalPrice.toLocaleString()}</span>
+                  </td>
+                  <td className="mi-td-markets">{m.marketCount}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      {marketData && (
+        <p className="mi-source">
+          {t("market.source")} <strong>data.gov.in</strong>
+          {Object.values(marketData).find(Boolean)?.lastUpdated && (
+            <span> · {t("market.as_of")} {Object.values(marketData).find(Boolean).lastUpdated}</span>
+          )}
+        </p>
+      )}
     </div>
   );
 }
@@ -575,6 +655,13 @@ export default function CropAdvisor() {
                   </span>
                 </div>
               )}
+
+              <MarketInsights
+                marketData={advisor.marketData}
+                mostProfitable={advisor.mostProfitable}
+                recommendations={advisor.recommendations}
+                t={t}
+              />
 
               <div className="ca-ml-note">
                 <TrendingUp size={12} color="var(--color-text-muted)" />

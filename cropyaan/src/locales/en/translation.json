@@ -467,7 +467,18 @@
       "confidence_fair": "Fair Match",
       "confidence_marginal": "Marginal"
     },
-    
+
+  "market": {
+    "tag": "Market Insights",
+    "most_profitable": "Most Profitable in Your Region",
+    "crop": "Crop",
+    "modal_price": "Avg. Price",
+    "range": "Range",
+    "markets": "Markets",
+    "source": "Source:",
+    "as_of": "as of"
+  },
+
   "crop": {
     "rice": {
       "name": "Rice",

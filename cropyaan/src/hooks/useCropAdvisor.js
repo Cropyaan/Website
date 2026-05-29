@@ -198,6 +198,7 @@ import { fetchWeatherData } from "../services/weatherService.js";
 import { getSoilForRegion } from "../data/soilData.js";
 import { detectSeason } from "../utils/seasonUtils.js";
 import { getTopCropRecommendations, getLocationAdvisory } from "../utils/recommendationEngine.js";
+import { fetchMarketPrices, getMostProfitableCrop } from "../services/marketService.js";
 
 export const ADVISOR_STATUS = {
   IDLE:      "idle",
@@ -216,6 +217,8 @@ const INITIAL_STATE = {
   season:          null,
   recommendations: [],
   advisory:        null,
+  marketData:      null,
+  mostProfitable:  null,
 };
 
 export function useCropAdvisor() {
@@ -285,6 +288,17 @@ export function useCropAdvisor() {
         t,
       });
 
+      // 6. Fetch market prices for recommended crops
+      let marketData = null;
+      let mostProfitable = null;
+      try {
+        const cropIds = recommendations.map((r) => r.crop.id);
+        marketData = await fetchMarketPrices(locationResult.state || locationResult.region, cropIds);
+        mostProfitable = getMostProfitableCrop(marketData, recommendations);
+      } catch {
+        // market data is optional — silently continue
+      }
+
       setState({
         status:          ADVISOR_STATUS.SUCCESS,
         error:           null,
@@ -294,6 +308,8 @@ export function useCropAdvisor() {
         season:          seasonData,
         recommendations,
         advisory,
+        marketData,
+        mostProfitable,
       });
     } catch (err) {
       console.error("[CropAdvisor] Analysis error:", err);
@@ -340,5 +356,7 @@ export function useCropAdvisor() {
     selectLocation,
     handleMapClick,
     reset,
+    marketData:     state.marketData,
+    mostProfitable: state.mostProfitable,
   };
 }
